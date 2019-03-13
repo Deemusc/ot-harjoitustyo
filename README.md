@@ -9,3 +9,5 @@ Ensimmäiset tehtävät:
 [komentorivi.txt](https://github.com/Deemusc/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
 
 Linkit yllä toimivat näppärästi.
+
+Tämä muutos ei mene GitHubiin.
