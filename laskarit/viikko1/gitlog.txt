@@ -1,0 +1,105 @@
+commit 1b492fafcc9f1db2458992b9993c68b33a474cb3
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:54:05 2019 +0200
+
+    muutoksiaa
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 0a7723953c8cb582f42ede5105a59cbcf4716abd
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:52:09 2019 +0200
+
+    uusia filuja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit c8c3f51d55af944f9a6708083d9da1a583766da6
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:43:50 2019 +0200
+
+    lisää muutoksia
+
+ eka.txt    | 6 +++---
+ kolmas.txt | 2 +-
+ 2 files changed, 4 insertions(+), 4 deletions(-)
+
+commit a018b1066c89198e4e2f0cb47cdcc4a12304c13b
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:40:22 2019 +0200
+
+    tiedoston uudelleennimeäminen
+
+ tiedosto.txt => eka.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 8e600019c285fc292b3b41cd4efe55758128bebb
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:39:11 2019 +0200
+
+    toinen.txt poistettu
+
+ toinen.txt | 1 -
+ 1 file changed, 1 deletion(-)
+
+commit 9a5104b42e75f9de3b241db5639cb531e6cbacce
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:36:55 2019 +0200
+
+    monta muutosta tiedostoon
+
+ tiedosto.txt | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+commit 2a80aba4e54dfcad3dcda21d6701aa54fac07664
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:20:12 2019 +0200
+
+    uusi kansio
+
+ stuff/neljas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit bc047afa3c1441d474ef82461ed478430ef6f9d9
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:19:27 2019 +0200
+
+    lisää muutoksia pariin tiedosoton
+
+ kolmas.txt | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit b62629c71fbf390b1e3735142a01745e03f0d18b
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:18:33 2019 +0200
+
+    Kolmas lisäys.
+
+ kolmas.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 87c119b60793819de77316cd6fecbfcaeab2eb68
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:16:56 2019 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit 6795af853f612a32dfda2972f9b004c34370cbdd
+Author: Niko Häppölä <niko.happola@gmail.com>
+Date:   Wed Mar 13 16:15:17 2019 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
