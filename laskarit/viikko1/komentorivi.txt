@@ -3,3 +3,6 @@ kurssit
     └── viikko1
 
 2 directories, 0 files
+
+
+// Tämä muutos tehty github-harjoittelua varten.
