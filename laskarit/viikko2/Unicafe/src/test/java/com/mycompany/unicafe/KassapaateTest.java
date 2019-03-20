@@ -110,4 +110,11 @@ public class KassapaateTest {
         assertEquals(100750, kassa.kassassaRahaa());
     }
 
+    @Test
+    public void ladattaessaNegatiivinenSummaSaldotEiMuutu() {
+        kassa.lataaRahaaKortille(kortti, -5);
+        assertEquals(100000, kassa.kassassaRahaa());
+        assertEquals(1000, kortti.saldo());
+    }
+
 }

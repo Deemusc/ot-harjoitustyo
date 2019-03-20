@@ -42,4 +42,11 @@ public class MaksukorttiTest {
         assertEquals(false, kortti.otaRahaa(15));
         assertEquals(10, kortti.saldo());
     }
+
+    @Test
+    public void tulostusToimiiOikein() {
+        assertEquals("saldo: 0.10", kortti.toString());
+        kortti.otaRahaa(5);
+        assertEquals("saldo: 0.5", kortti.toString());
+    }
 }
