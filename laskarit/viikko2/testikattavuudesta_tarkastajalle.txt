@@ -1,0 +1,1 @@
+Teen tehtäviä fuksiläppärillä (ei sudo-oikeuksia) ja saadakseni testit toimimaan tein korjauksen OpenJDK:n Maven-bugiin. Tämän johdosta Jacocon testikattavuusraportit eivät toimi.
