@@ -10,9 +10,10 @@ Helsingin yliopiston kurssiin Ohjelmistotekniikka liittyvä repositorio.
 
 [Laskarit - viikko 2](https://github.com/Deemusc/ot-harjoitustyo/tree/master/laskarit/viikko2)
 
-**Oman projektin aloitus**
+##### Oman projektin aloitus
 
 [Laukaisukarttasovellus](https://github.com/Deemusc/ot-harjoitustyo/tree/master/Laukaisukarttasovellus)
+
 [Vaatimusmäärittely](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Laukaisukarttasovellus/dokumentaatio/vaatimusmaarittely.md)
 
 ### Ensimmäinen OT-harjoitusviikko
