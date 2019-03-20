@@ -1,4 +1,16 @@
-**Ensimmäinen OT-harjoitusviikko**
+# Ohjelmistotekniikka - kevät 2019
+
+Helsingin yliopiston kurssiin Ohjelmistotekniikka liittyvä repositorio.
+
+### Työaikakirjanpito
+
+[Työaikakirjanpito](https://github.com/Deemusc/ot-harjoitustyo/blob/master/tyoaikakirjanpito.md)
+
+### Toinen OT-harjoitusviikko
+
+
+
+### Ensimmäinen OT-harjoitusviikko
 
 Tämä repo on tehty *ensimmäisellä* harjoitusviikolla ja tämä **README** sisältää tekstiä *Markdownilla*.
 
