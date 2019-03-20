@@ -8,7 +8,7 @@ Helsingin yliopiston kurssiin Ohjelmistotekniikka liittyvä repositorio.
 
 ### Toinen OT-harjoitusviikko
 
-
+[Laskarit - viikko 2](https://github.com/Deemusc/ot-harjoitustyo/tree/master/laskarit/viikko2)
 
 ### Ensimmäinen OT-harjoitusviikko
 
