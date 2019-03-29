@@ -16,11 +16,11 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 Testit suoritetaan komennolla
 
-'mvn test'
+```mvn test```
 
 Testikattavuusraportti testaamisen yhteydessä luodaan komennolla
 
-'mvn test jacoco:report'
+```mvn test jacoco:report```
 
 Testikattavuusraporttia voi tarkastella avaamalla selaimella tiedosto */target/site/jacoco/index.html*
 
@@ -28,6 +28,6 @@ Testikattavuusraporttia voi tarkastella avaamalla selaimella tiedosto */target/s
 
 Tiedostoon [checkstyle.xml](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla
 
-'mvn jxr:jxr checkstyle:checkstyle'
+```mvn jxr:jxr checkstyle:checkstyle```
 
 Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto */target/site/checkstyle.html*
