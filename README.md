@@ -1,29 +1,33 @@
-# Ohjelmistotekniikka - kevät 2019
+# Laukaisukarttasovellus
 
-Helsingin yliopiston kurssiin Ohjelmistotekniikka liittyvä repositorio.
+Sovellus siirtää perinteisen salibandyn laukaisukartan sähköiseen muotoon. Sovellusta voi käyttää useampi rekisteröitynyt käyttäjä, ohjelma tallentaa käyttäjän luomat laukaisukartat myöhempää tarkastelua varten.
 
-### Työaikakirjanpito
+Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjoitustyö. Tämä repositorio sisältää tästä syystä myös kurssin harjoitustehtävien vastauksia.
+
+## Dokumentaatio
+
+[Vaatimusmäärittely](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/vaatimusmaarittely.md)
 
 [Työaikakirjanpito](https://github.com/Deemusc/ot-harjoitustyo/blob/master/tyoaikakirjanpito.md)
 
-### Toinen OT-harjoitusviikko
+## Komentorivitoiminnot
 
-[Laskarit - viikko 2](https://github.com/Deemusc/ot-harjoitustyo/tree/master/laskarit/viikko2)
+### Testaus
 
-##### Oman projektin aloitus
+Testit suoritetaan komennolla
 
-[Laukaisukarttasovellus](https://github.com/Deemusc/ot-harjoitustyo/tree/master/Laukaisukarttasovellus)
+'mvn test'
 
-[Vaatimusmäärittely](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Laukaisukarttasovellus/dokumentaatio/vaatimusmaarittely.md)
+Testikattavuusraportti testaamisen yhteydessä luodaan komennolla
 
-### Ensimmäinen OT-harjoitusviikko
+'mvn test jacoco:report'
 
-Tämä repo on tehty *ensimmäisellä* harjoitusviikolla ja tämä **README** sisältää tekstiä *Markdownilla*.
+Testikattavuusraporttia voi tarkastella avaamalla selaimella tiedosto */target/site/jacoco/index.html*
 
-Ensimmäiset tehtävät:
+### Checkstyle
 
-[gitlog.txt](https://github.com/Deemusc/ot-harjoitustyo/blob/master/laskarit/viikko1/gitlog.txt)
+Tiedostoon [checkstyle.xml](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla
 
-[komentorivi.txt](https://github.com/Deemusc/ot-harjoitustyo/blob/master/laskarit/viikko1/komentorivi.txt)
+'mvn jxr:jxr checkstyle:checkstyle'
 
-Linkit yllä toimivat näppärästi.
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto */target/site/checkstyle.html*

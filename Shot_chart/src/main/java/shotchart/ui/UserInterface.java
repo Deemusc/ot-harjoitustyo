@@ -45,9 +45,8 @@ public class UserInterface extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
-        // -------- login scene -----------------------
 
+        // -------- login scene -----------------------
         VBox loginPane = new VBox(20);
         HBox inputPane = new HBox(20);
         loginPane.setPadding(new Insets(10));
@@ -61,13 +60,13 @@ public class UserInterface extends Application {
 
         Button loginButton = new Button("Login");
         Button createButton = new Button("Create new user");
-        
+
         loginButton.setOnAction(e -> {
             String username = usernameInput.getText();
             String password = passwordInput.getText();
             menuLabel.setText(username + " logged in...");
             if (shotChartApp.login(username, password)) {
-                loginMessage.setText("");                
+                loginMessage.setText("");
                 primaryStage.setScene(menuScene);
                 usernameInput.setText("");
                 passwordInput.setText("");
@@ -88,7 +87,6 @@ public class UserInterface extends Application {
         loginScene = new Scene(loginPane, 600, 500);
 
         // --------- Create new user -scene -----------------------
-        
         VBox newUserPane = new VBox(20);
 
         HBox newUsernamePane = new HBox(20);
@@ -133,17 +131,16 @@ public class UserInterface extends Application {
         newUserScene = new Scene(newUserPane, 600, 500);
 
         // ------ menuscene ------------------------------------
-        
         VBox menuLayoutPane = new VBox(20);
         Label menuHeader = new Label("Shot chart application");
-        
+
         Button newGameButton = new Button("New game");
         Button viewGamesButton = new Button("View previous games");
-        
+
         menuLayoutPane.getChildren().addAll(menuHeader, newGameButton, viewGamesButton);
-        
+
         menuScene = new Scene(menuLayoutPane, 600, 500);
-        
+
         // PrimaryStage
         primaryStage.setTitle("ShotCharts");
         primaryStage.setScene(loginScene);
@@ -163,9 +160,9 @@ public class UserInterface extends Application {
     public void stop() {
         System.out.println("Laukaisukartat sulkeutuu");
     }
-    
+
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }
