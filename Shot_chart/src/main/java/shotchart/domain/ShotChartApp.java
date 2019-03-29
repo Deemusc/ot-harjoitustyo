@@ -1,8 +1,10 @@
 package shotchart.domain;
 
-// @deemus
+// @deemusc
 import shotchart.dao.ShotChartDao;
 import shotchart.dao.UserDao;
+
+// Sovelluslogiikasta vastaava luokka.
 
 public class ShotChartApp {
 
@@ -10,16 +12,21 @@ public class ShotChartApp {
     private UserDao userDao;
     private User loggedIn;
 
-    public ShotChartApp(ShotChart shotChart, UserDao userDao) {
+    public ShotChartApp(ShotChartDao shotChartDao, UserDao userDao) {
         this.shotChartDao = shotChartDao;
         this.userDao = userDao;
     }
 
-    public boolean login(String username) {
+    public boolean login(String username, String password) {
         User user = userDao.findByUsername(username);
         if (user == null) {
             return false;
         }
+        
+        if (!user.getPassword().equals(password)) {
+            return false;
+        }
+        
         loggedIn = user;
 
         return true;
@@ -33,12 +40,12 @@ public class ShotChartApp {
         loggedIn = null;
     }
 
-    public boolean createUser(String username, String name) {
+    public boolean createUser(String username, String password) {
         if (userDao.findByUsername(username) != null) {
             return false;
         }
 
-        User user = new User(username, name);
+        User user = new User(username, password);
 
         try {
             userDao.create(user);

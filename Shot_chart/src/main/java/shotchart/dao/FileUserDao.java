@@ -33,7 +33,7 @@ public class FileUserDao implements UserDao {
     private void save() throws Exception {
         try (FileWriter writer = new FileWriter(new File(file))) {
             for (User user : users) {
-                writer.write(user.getUsername() + ";" + user.getName() + "\n");
+                writer.write(user.getUsername() + ";" + user.getPassword() + "\n");
             }
         }
     }

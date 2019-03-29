@@ -4,16 +4,16 @@ package shotchart.domain;
 // Sovelluksen käyttäjää kuvaava luokka.
 public class User {
 
-    private String name;
     private String username;
+    private String password;
 
-    public User(String name, String username) {
-        this.name = name;
+    public User(String username, String password) {
         this.username = username;
+        this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getPassword() {
+        return password;
     }
 
     public String getUsername() {
@@ -29,5 +29,4 @@ public class User {
         User other = (User) obj;
         return username.equals(other.username);
     }
-
 }
