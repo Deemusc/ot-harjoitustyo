@@ -8,7 +8,7 @@ public class Shot {
     private int y;
     private String type;
 
-    public Shot(int y, int x, String type) {
+    public Shot(int x, int y, String type) {
         this.x = x;
         this.y = y;
         this.type = type;

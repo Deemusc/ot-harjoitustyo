@@ -9,7 +9,7 @@ import shotchart.domain.User;
 
 // @deemusc
 public class UserTest {
-    
+
     @Test
     public void equalWhenSameUsername() {
         User u1 = new User("testaaja", "testi123");
@@ -29,6 +29,18 @@ public class UserTest {
         User u = new User("testaaja", "testi123");
         Object o = new Object();
         assertFalse(u.equals(o));
+    }
+
+    @Test
+    public void getUsernameReturnsCorrectName() {
+        User u = new User("Jokerit", "ifkizuks");
+        assertEquals(u.getUsername(), "Jokerit");
+    }
+
+    @Test
+    public void getPasswordReturnsCorrect() {
+        User u = new User("Joksut", "rapu123");
+        assertEquals(u.getPassword(), "rapu123");
     }
 
 }
