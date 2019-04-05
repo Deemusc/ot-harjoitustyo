@@ -1,0 +1,1 @@
+![](pakkauskaavio.png)
