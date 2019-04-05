@@ -54,15 +54,18 @@ public class UserInterface extends Application {
     public void start(Stage primaryStage) throws Exception {
         // ----- Luodaan sisäänkirjautumisikkuna -----
         VBox loginPane = new VBox(20);
-        HBox inputPane = new HBox(20);
         loginPane.setPadding(new Insets(10));
+        HBox inputUsernamePane = new HBox(20);
         Label usernameLabel = new Label("Team's username:");
         TextField usernameInput = new TextField();
+        usernameLabel.setPrefWidth(150);
+        inputUsernamePane.getChildren().addAll(usernameLabel, usernameInput);
+
+        HBox inputPasswordPane = new HBox(20);
         Label passwordLabel = new Label("Password:");
         PasswordField passwordInput = new PasswordField();
-
-        // Asetellaan elementit
-        inputPane.getChildren().addAll(usernameLabel, usernameInput, passwordLabel, passwordInput);
+        passwordLabel.setPrefWidth(150);
+        inputPasswordPane.getChildren().addAll(passwordLabel, passwordInput);
 
         // Viesti sisäänkirjautumisen ongelmatilanteita varten...
         Label loginMessage = new Label();
@@ -92,30 +95,29 @@ public class UserInterface extends Application {
             primaryStage.setScene(newUserScene);
         });
 
-        loginPane.getChildren().addAll(loginMessage, inputPane, loginButton, createButton);
+        loginPane.getChildren().addAll(loginMessage, inputUsernamePane, inputPasswordPane, loginButton, createButton);
 
         loginScene = new Scene(loginPane, 600, 1000);
 
         // ----- Uuden käyttäjän luomisikkuna -----
         VBox newUserPane = new VBox(20);
+        newUserPane.setPadding(new Insets(10));
         HBox newUsernamePane = new HBox(20);
-        newUsernamePane.setPadding(new Insets(10));
         TextField newUsernameInput = new TextField();
         Label newUsernameLabel = new Label("Team's username:");
-        newUsernameLabel.setPrefWidth(100);
+        newUsernameLabel.setPrefWidth(150);
         newUsernamePane.getChildren().addAll(newUsernameLabel, newUsernameInput);
 
         HBox newPasswordPane = new HBox(20);
-        newPasswordPane.setPadding(new Insets(10));
         PasswordField newPasswordInput = new PasswordField();
         Label newPasswordLabel = new Label("Password:");
-        newPasswordLabel.setPrefWidth(100);
+        newPasswordLabel.setPrefWidth(150);
         newPasswordPane.getChildren().addAll(newPasswordLabel, newPasswordInput);
 
         Label userCreationMessage = new Label();
 
         Button createNewUserButton = new Button("Create");
-        createNewUserButton.setPadding(new Insets(10));
+        Button backToLoginButton = new Button("Back to login screen");
 
         createNewUserButton.setOnAction(e -> {
             String username = newUsernameInput.getText();
@@ -136,7 +138,11 @@ public class UserInterface extends Application {
             }
         });
 
-        newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newPasswordPane, createNewUserButton);
+        backToLoginButton.setOnAction(e -> {
+            primaryStage.setScene(loginScene);
+        });
+
+        newUserPane.getChildren().addAll(userCreationMessage, newUsernamePane, newPasswordPane, createNewUserButton, backToLoginButton);
 
         newUserScene = new Scene(newUserPane, 600, 1000);
 
