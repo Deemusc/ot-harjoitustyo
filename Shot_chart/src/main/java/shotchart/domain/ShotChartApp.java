@@ -70,8 +70,8 @@ public class ShotChartApp {
     // Uuden pelin luominen. Piirretään tyhjä kenttä (oma metodi?) ja luodaan uudelle pelille tiedosto,
     // jonne syötetään 'tyhjä' koordinaatisto (oma metodi?). Filu tallennetaan tässä kohtaa.
     
-    public void createNewGame() {
-
+    public void createNewGame(String date, String opponent) {
+        // luodaan uusi peli-olio, jolle annetaan date ja vastustaja...
     }
 
 }

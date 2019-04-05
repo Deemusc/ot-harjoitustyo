@@ -11,9 +11,9 @@ public class ShotChart {
     private String homeTeam;
     private String awayTeam;
     private User user;
-    private int[][] shoots;
+    private String[][] shoots;
 
-    public ShotChart(int id, String date, String homeTeam, String awayTeam, User user, int[][] shoots) {
+    public ShotChart(int id, String date, String homeTeam, String awayTeam, User user, String[][] shoots) {
         this.id = id;
         this.date = date;
         this.homeTeam = homeTeam;
@@ -24,7 +24,7 @@ public class ShotChart {
 
     public ShotChart(User user) {
         this.user = user;
-        this.shoots = new int[200][400];
+        this.shoots = new String[200][400];
     }
 
     public String getShootsAsString() {
@@ -38,18 +38,18 @@ public class ShotChart {
     }
     
     public void addGoal(int x, int y) {
-        // maalin merkki on 1 
-        this.shoots[x][y] = 1;
+        // maalin merkki on G 
+        this.shoots[x][y] = "G";
     }
 
     public void addSavedShot(int x, int y) {
-        // torjutun laukauksen merkki on 2
-        this.shoots[x][y] = 2;
+        // torjutun laukauksen merkki on B
+        this.shoots[x][y] = "B";
     }
 
     public void addMissedShot(int x, int y) {
-        // ohilaukauksen merkki on 3
-        this.shoots[x][y] = 3;
+        // ohilaukauksen merkki on M
+        this.shoots[x][y] = "M";
     }
 
     public int getId() {
@@ -84,11 +84,11 @@ public class ShotChart {
         this.awayTeam = awayTeam;
     }
 
-    public int[][] getShoots() {
+    public String[][] getShoots() {
         return shoots;
     }
 
-    public void setShoots(int[][] shoots) {
+    public void setShoots(String[][] shoots) {
         this.shoots = shoots;
     }
 
