@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import shotchart.dao.ShotChartDao;
 import shotchart.dao.UserDao;
@@ -69,24 +70,8 @@ public class ShotChartApp {
     // Uuden pelin luominen. Piirretään tyhjä kenttä (oma metodi?) ja luodaan uudelle pelille tiedosto,
     // jonne syötetään 'tyhjä' koordinaatisto (oma metodi?). Filu tallennetaan tässä kohtaa.
     
-    public Scene createNewGame() {
-        Canvas gameBase = new Canvas(640, 480);
-        GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
+    public void createNewGame() {
 
-        BorderPane gameLayout = new BorderPane();
-        gameLayout.setCenter(gameBase);
-
-        new AnimationTimer() {
-            public void handle(long currentNanoTime) {
-                gameBaseDrawer.setFill(Color.WHITE);
-                gameBaseDrawer.clearRect(0, 0, 640, 480);
-                gameBaseDrawer.setFill(Color.BLACK);
-
-                gameBaseDrawer.fillRect(100, 100, 10, 10);
-            }
-        }.start();
-
-        return new Scene(gameLayout, 800, 600);
     }
 
 }
