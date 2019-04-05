@@ -118,7 +118,9 @@ public class ShotChart {
         if (this.id != other.id) {
             return false;
         }
-        return true;
+        if (!Objects.equals(this.date, other.date)) {
+            return false;
+        }
+        return Objects.equals(this.opponent, other.opponent);
     }
-
 }

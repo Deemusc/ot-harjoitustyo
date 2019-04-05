@@ -8,6 +8,8 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 [Vaatimusmäärittely](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/vaatimusmaarittely.md)
 
+[Arkkitehtuurikuvaus](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/arkkitehtuuri.md)
+
 [Työaikakirjanpito](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/tyoaikakirjanpito.md)
 
 ## Komentorivitoiminnot
