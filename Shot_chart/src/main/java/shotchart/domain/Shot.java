@@ -1,13 +1,14 @@
 package shotchart.domain;
 
-//@deemusc
-public class Note {
+//@deemus
+// Yksittäistä laukausta kuvaava luokka
+public class Shot {
 
     private int x;
     private int y;
     private String type;
 
-    public Note(int y, int x, String type) {
+    public Shot(int y, int x, String type) {
         this.x = x;
         this.y = y;
         this.type = type;

@@ -1,56 +1,57 @@
 package shotchart.domain;
 
 // @deemus
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Objects;
 
 // Yksittäistä laukaisukarttaa kuvaava luokka.
 public class ShotChart {
 
     private int id;
     private String date;
-    private String homeTeam;
-    private String awayTeam;
+    private String opponent;
     private User user;
-    private String[][] shoots;
+    private ArrayList<Shot> shots;
 
-    public ShotChart(int id, String date, String homeTeam, String awayTeam, User user, String[][] shoots) {
+    // konstruktori laukaisukarttaoliolle, joka haetaan ja muodostetaan tiedostosta Daossa.
+    public ShotChart(int id, String date, String opponent, User user, ArrayList<Shot> shots) {
         this.id = id;
         this.date = date;
-        this.homeTeam = homeTeam;
-        this.awayTeam = awayTeam;
-        this.shoots = shoots;
+        this.opponent = opponent;
+        this.shots = shots;
         this.user = user;
     }
 
-    public ShotChart(User user) {
+    // Konstruktori laukaisukarttaoliolle, joka luodaan tyhjästä.
+    public ShotChart(String date, String opponent, User user) {
         this.user = user;
-        this.shoots = new String[200][400];
+        this.date = date;
+        this.opponent = opponent;
+        this.shots = new ArrayList<>();
     }
 
-    public String getShootsAsString() {
+    public String getShotsAsString() {
         StringBuilder sb = new StringBuilder();
-        for (int x = 0; x < shoots.length; x++) {
-            for (int y = 0; y < shoots[0].length; y++) {
-                sb.append(";").append(shoots[x][y]).append(";").append(x).append(";").append(y);
-            }
+        for (int i = 0; i < shots.size(); i++) {
+            sb.append(";").append(shots.get(i).getType()).append(";").append(shots.get(i).getX()).append(";").append(shots.get(i).getY());
         }
         return sb.toString();
     }
-    
-    public void addGoal(int x, int y) {
-        // maalin merkki on G 
-        this.shoots[x][y] = "G";
-    }
-
-    public void addSavedShot(int x, int y) {
-        // torjutun laukauksen merkki on B
-        this.shoots[x][y] = "B";
-    }
-
-    public void addMissedShot(int x, int y) {
-        // ohilaukauksen merkki on M
-        this.shoots[x][y] = "M";
-    }
+//    public void addGoal(int x, int y) {
+//        // maalin merkki on G 
+//        this.shots[x][y] = "G";
+//    }
+//
+//    public void addSavedShot(int x, int y) {
+//        // torjutun laukauksen merkki on B
+//        this.shots[x][y] = "B";
+//    }
+//
+//    public void addMissedShot(int x, int y) {
+//        // ohilaukauksen merkki on M
+//        this.shots[x][y] = "M";
+//    }
 
     public int getId() {
         return id;
@@ -68,28 +69,20 @@ public class ShotChart {
         this.date = date;
     }
 
-    public String getHomeTeam() {
-        return homeTeam;
+    public String getOpponent() {
+        return opponent;
     }
 
-    public void setHomeTeam(String homeTeam) {
-        this.homeTeam = homeTeam;
+    public void setOpponent(String opponent) {
+        this.opponent = opponent;
     }
 
-    public String getAwayTeam() {
-        return awayTeam;
+    public ArrayList getShots() {
+        return shots;
     }
 
-    public void setAwayTeam(String awayTeam) {
-        this.awayTeam = awayTeam;
-    }
-
-    public String[][] getShoots() {
-        return shoots;
-    }
-
-    public void setShoots(String[][] shoots) {
-        this.shoots = shoots;
+    public void setShots(ArrayList<Shot> shots) {
+        this.shots = shots;
     }
 
     public User getUser() {
@@ -101,11 +94,31 @@ public class ShotChart {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 53 * hash + this.id;
+        hash = 53 * hash + Objects.hashCode(this.date);
+        hash = 53 * hash + Objects.hashCode(this.opponent);
+        hash = 53 * hash + Objects.hashCode(this.user);
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ShotChart)) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        ShotChart other = (ShotChart) obj;
-        return id == other.id;
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ShotChart other = (ShotChart) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        return true;
     }
+
 }
