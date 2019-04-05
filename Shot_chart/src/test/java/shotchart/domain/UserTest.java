@@ -9,7 +9,7 @@ import shotchart.domain.User;
 
 // @deemusc
 public class UserTest {
-
+    
     @Test
     public void equalWhenSameUsername() {
         User u1 = new User("testaaja", "testi123");

@@ -3,13 +3,17 @@ package shotchart.ui;
 // @deemus
 import java.io.FileInputStream;
 import java.util.Properties;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -26,6 +30,7 @@ public class UserInterface extends Application {
     private Scene menuScene;
     private Scene newUserScene;
     private Scene loginScene;
+    private Scene newGameScene;
 
     private Label menuLabel = new Label();
 
@@ -137,9 +142,17 @@ public class UserInterface extends Application {
         Button newGameButton = new Button("New game");
         Button viewGamesButton = new Button("View previous games");
 
+        newGameButton.setOnAction(e -> {
+            primaryStage.setScene(newGameScene);
+        });
+
         menuLayoutPane.getChildren().addAll(menuHeader, newGameButton, viewGamesButton);
 
         menuScene = new Scene(menuLayoutPane, 600, 500);
+
+        // ----------- newgamescene ---------------------------
+        // kutsutaan vain sovelluslogiikassa olevaa metodia, joka piirtää meille tyhjän kentän
+        newGameScene = shotChartApp.createNewGame();
 
         // PrimaryStage
         primaryStage.setTitle("ShotCharts");
