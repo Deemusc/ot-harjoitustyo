@@ -13,3 +13,12 @@
 
 **Pe 29.3.**
  - 5 h / Kirjautumistoiminnallisuus hyvään kuntoon, ensimmäisiä testejä, paljon luokkia luotu.
+
+#### Viikko 4
+
+**Pe 5.4.**
+ - 4 h / Graafisen käyttöliittymän luomista ja hiomista.
+ - 3 h / Sovelluslogiikan kehittämistä ja testien luomista.
+ - 1 h / Jacoco, checkstylet yms. kuntoon ja repositorio siistiksi.
+
+**Yhteensä: 18 tuntia**
