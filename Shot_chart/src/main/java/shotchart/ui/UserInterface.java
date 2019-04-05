@@ -28,14 +28,13 @@ public class UserInterface extends Application {
 
     private ShotChartApp shotChartApp;
 
-    private Scene shotChartScene;
     private Scene menuScene;
     private Scene newUserScene;
     private Scene loginScene;
     private Scene newGameScene;
     private Scene fillNewGameInfoScene;
 
-    private Label menuLabel = new Label();
+    private final Label menuLabel = new Label("Shot chart application - v.0.3");
 
     @Override
     public void init() throws Exception {
@@ -53,33 +52,36 @@ public class UserInterface extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-        // -------- login scene -----------------------
+        // ----- Luodaan sisäänkirjautumisikkuna -----
         VBox loginPane = new VBox(20);
         HBox inputPane = new HBox(20);
         loginPane.setPadding(new Insets(10));
-        Label usernameLabel = new Label("Username:");
+        Label usernameLabel = new Label("Team's username:");
         TextField usernameInput = new TextField();
         Label passwordLabel = new Label("Password:");
         PasswordField passwordInput = new PasswordField();
 
+        // Asetellaan elementit
         inputPane.getChildren().addAll(usernameLabel, usernameInput, passwordLabel, passwordInput);
+
+        // Viesti sisäänkirjautumisen ongelmatilanteita varten...
         Label loginMessage = new Label();
 
+        // Nappulat kirjautumiseen ja uuden käyttäjän luomiseen
         Button loginButton = new Button("Login");
         Button createButton = new Button("Create new user");
 
+        // Nappuloiden toiminta
         loginButton.setOnAction(e -> {
             String username = usernameInput.getText();
             String password = passwordInput.getText();
-            menuLabel.setText(username + " logged in...");
             if (shotChartApp.login(username, password)) {
                 loginMessage.setText("");
                 primaryStage.setScene(menuScene);
                 usernameInput.setText("");
                 passwordInput.setText("");
             } else {
-                loginMessage.setText("Username or password is not correct.");
+                loginMessage.setText("Username or password is not valid.");
                 loginMessage.setTextFill(Color.RED);
             }
         });
@@ -94,13 +96,12 @@ public class UserInterface extends Application {
 
         loginScene = new Scene(loginPane, 600, 1000);
 
-        // --------- Create new user -scene -----------------------
+        // ----- Uuden käyttäjän luomisikkuna -----
         VBox newUserPane = new VBox(20);
-
         HBox newUsernamePane = new HBox(20);
         newUsernamePane.setPadding(new Insets(10));
         TextField newUsernameInput = new TextField();
-        Label newUsernameLabel = new Label("Username:");
+        Label newUsernameLabel = new Label("Team's username:");
         newUsernameLabel.setPrefWidth(100);
         newUsernamePane.getChildren().addAll(newUsernameLabel, newUsernameInput);
 
@@ -120,6 +121,7 @@ public class UserInterface extends Application {
             String username = newUsernameInput.getText();
             String password = newPasswordInput.getText();
 
+            // Tarkistetaan, että tunnukset ovat yli 2 merkkiä pitkät
             if (username.length() == 2 || password.length() < 2) {
                 userCreationMessage.setText("Username or password is too short.");
                 userCreationMessage.setTextFill(Color.RED);
@@ -129,7 +131,7 @@ public class UserInterface extends Application {
                 loginMessage.setTextFill(Color.GREEN);
                 primaryStage.setScene(loginScene);
             } else {
-                userCreationMessage.setText("Username has to be unique.");
+                userCreationMessage.setText("Username has already taken.");
                 userCreationMessage.setTextFill(Color.RED);
             }
         });
@@ -138,7 +140,7 @@ public class UserInterface extends Application {
 
         newUserScene = new Scene(newUserPane, 600, 1000);
 
-        // ------ menuscene ------------------------------------
+        // ----- Luodaan ikkuna päävalikolle -----
         VBox menuLayoutPane = new VBox(20);
         Label menuHeader = new Label("Shot chart application");
 
@@ -157,12 +159,11 @@ public class UserInterface extends Application {
             primaryStage.setScene(loginScene);
         });
 
-        menuLayoutPane.getChildren().addAll(menuLabel, menuHeader, newGameButton, viewGamesButton);
+        menuLayoutPane.getChildren().addAll(menuLabel, menuHeader, newGameButton, viewGamesButton, logoutButton);
 
         menuScene = new Scene(menuLayoutPane, 600, 1000);
 
-        // -------------------------------------
-        // Asetteluesineitä ja muotoilua
+        // ----- Luodaan ikkuna uuden pelin tietojen syöttämiselle -----
         VBox infoPane = new VBox(20);
         VBox infoInputPane = new VBox(20);
         infoPane.setPadding(new Insets(10));
@@ -199,8 +200,8 @@ public class UserInterface extends Application {
 
         newGameScene = newGameBase();
 
-        // PrimaryStage
-        primaryStage.setTitle("ShotCharts");
+        // ----- Luodaan primarystage -----
+        primaryStage.setTitle("ShotCharts Application");
         primaryStage.setScene(loginScene);
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> {

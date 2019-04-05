@@ -28,7 +28,7 @@ public class FileShotChartDao implements ShotChartDao {
                 String homeTeam = parts[2];
                 String awayTeam = parts[3];
                 User user = users.getAll().stream().filter(u -> u.getUsername().equals(parts[4])).findFirst().orElse(null);
-                int[][] shoots = new int[200][400];
+                String[][] shoots = new String[200][400];
                 for (int i = 5; i < parts.length; i += 3) {
                     shoots[i+1][i+2] = i;
                 }
