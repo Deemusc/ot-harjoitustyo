@@ -262,7 +262,7 @@ public class UserInterface extends Application {
             }
         }
 
-        // Luodaan ensin hiirenkuuntelija                
+        // Luodaan hiirenkuuntelija                
         gameBase.setOnMouseClicked(
                 (MouseEvent e) -> {
                     int x = (int) e.getX();
@@ -283,7 +283,7 @@ public class UserInterface extends Application {
                 }
         );
 
-        // Piirretään tyhjä kenttä
+        // Piirretään kenttä
         new AnimationTimer() {
             long previous = 0;
 
@@ -327,7 +327,7 @@ public class UserInterface extends Application {
                 gameBaseDrawer.fillRect(570, 50, 5, 5);
                 gameBaseDrawer.fillRect(570, 900, 5, 5);
 
-                // Ei piirretä laitoja ainakaan tässä iteraatiossa.     
+                // Piirretään laukauksia.    
                 gameBaseDrawer.setFill(Color.BLACK);
                 for (int x = 0; x < shotsToDraw.length; x++) {
                     for (int y = 0; y < shotsToDraw[0].length; y++) {
@@ -336,7 +336,6 @@ public class UserInterface extends Application {
                         }
                     }
                 }
-
                 this.previous = currentNanoTime;
             }
         }

@@ -77,13 +77,8 @@ public class ShotChartApp {
 
     public void addShot(int x, int y, String type) {
         shotChart.addShot(x, y, type);
-        //System.out.println(shotChart.getShotsAsString());
     }
 
-    public String[][] drawShots() {
-        return shotChart.shotsToDraw();              
-    }
-    
     public boolean saveGame() {
         try {
             shotChart = shotChartDao.update(this.shotChart);
