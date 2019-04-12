@@ -26,5 +26,6 @@
 **Pe 12.4.**
  - 3 h / Graafisen käyttöliittymän kehittämistä, laukausten piirtäminen.
  - 1 h / Sovelluslogiikan kehittämistä, laukausten tallentaminen.
+ - 2 h / Testien kirjoittamista, release, repoa siistiksi yms.
 
-**Yhteensä: 22 tuntia**
+**Yhteensä: 24 tuntia**
