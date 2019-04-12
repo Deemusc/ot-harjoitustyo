@@ -8,6 +8,8 @@ import shotchart.domain.ShotChart;
 
 public interface ShotChartDao {
     ShotChart create(ShotChart shotChart) throws Exception;
+
+    ShotChart update(ShotChart shotChart) throws Exception;
     
     List<ShotChart> getAll();
         

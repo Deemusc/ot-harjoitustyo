@@ -55,6 +55,22 @@ public class FileShotChartDao implements ShotChartDao {
     }
 
     @Override
+    public ShotChart update(ShotChart shotChart) throws Exception {
+        int index = -1;
+        for (int i = 0; i < shotCharts.size(); i++) {
+            if (shotCharts.get(i).getId() == shotChart.getId()) {
+                index = i;
+            }
+        }
+        if (index != -1) {
+            shotCharts.remove(index);
+            shotCharts.add(shotChart);
+            save();
+        }
+        return shotChart;
+    }
+
+    @Override
     public ShotChart create(ShotChart shotChart) throws Exception {
         shotChart.setId(generateId());
         shotCharts.add(shotChart);

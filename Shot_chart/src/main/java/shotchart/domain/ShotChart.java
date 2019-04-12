@@ -38,21 +38,19 @@ public class ShotChart {
         }
         return sb.toString();
     }
-//    public void addGoal(int x, int y) {
-//        // maalin merkki on G 
-//        this.shots[x][y] = "G";
-//    }
-//
-//    public void addSavedShot(int x, int y) {
-//        // torjutun laukauksen merkki on B
-//        this.shots[x][y] = "B";
-//    }
-//
-//    public void addMissedShot(int x, int y) {
-//        // ohilaukauksen merkki on M
-//        this.shots[x][y] = "M";
-//    }
-
+    
+    public void addShot(int x, int y, String type) {
+        this.shots.add(new Shot(x, y, type));
+    }
+    
+    public String[][] shotsToDraw() {
+        String[][] shotsToDraw = new String[600][950];
+        for (int i = 0; i < shots.size(); i++) {
+            shotsToDraw[shots.get(i).getX()][shots.get(i).getY()] = shots.get(i).getType();
+        }            
+        return shotsToDraw;
+    }
+    
     public int getId() {
         return id;
     }

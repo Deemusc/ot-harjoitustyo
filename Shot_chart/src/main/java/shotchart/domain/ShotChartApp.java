@@ -1,6 +1,7 @@
 package shotchart.domain;
 
 // @deemusc
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -17,6 +18,7 @@ public class ShotChartApp {
     private ShotChartDao shotChartDao;
     private UserDao userDao;
     private User loggedIn;
+    private ShotChart shotChart;
 
     public ShotChartApp(ShotChartDao shotChartDao, UserDao userDao) {
         this.shotChartDao = shotChartDao;
@@ -30,13 +32,10 @@ public class ShotChartApp {
         if (user == null) {
             return false;
         }
-
         if (!user.getPassword().equals(password)) {
             return false;
         }
-
         loggedIn = user;
-
         return true;
     }
 
@@ -55,30 +54,42 @@ public class ShotChartApp {
         if (userDao.findByUsername(username) != null) {
             return false;
         }
-
         User user = new User(username, password);
-
         try {
             userDao.create(user);
         } catch (Exception e) {
             return false;
         }
-
         return true;
     }
 
-    // Uuden pelin luominen. Piirretään tyhjä kenttä (oma metodi?) ja luodaan uudelle pelille tiedosto,
-    // jonne syötetään 'tyhjä' koordinaatisto (oma metodi?). Filu tallennetaan tässä kohtaa.
+    // Uuden pelin luominen.
     public boolean createNewGame(String date, String opponent) {
-        // luodaan uusi peli-olio, jolle annetaan date, vastustaja ja käyttäjä
-        ShotChart shotChart = new ShotChart(date, opponent, loggedIn);
+        // luodaan uusi peli-olio, jolle annetaan date, vastustaja ja käyttäjä       
+        ShotChart sc = new ShotChart(date, opponent, loggedIn);
         try {
-            shotChartDao.create(shotChart);
+            shotChart = shotChartDao.create(sc);
         } catch (Exception e) {
             return false;
         }
         return true;
-
     }
 
+    public void addShot(int x, int y, String type) {
+        shotChart.addShot(x, y, type);
+        //System.out.println(shotChart.getShotsAsString());
+    }
+
+    public String[][] drawShots() {
+        return shotChart.shotsToDraw();              
+    }
+    
+    public boolean saveGame() {
+        try {
+            shotChart = shotChartDao.update(this.shotChart);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }

@@ -2,6 +2,7 @@ package shotchart.ui;
 
 // @deemus
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.Properties;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -15,13 +16,16 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import shotchart.dao.FileShotChartDao;
 import shotchart.dao.FileUserDao;
+import shotchart.domain.Shot;
 import shotchart.domain.ShotChartApp;
 
 public class UserInterface extends Application {
@@ -73,6 +77,7 @@ public class UserInterface extends Application {
         // Nappulat kirjautumiseen ja uuden käyttäjän luomiseen
         Button loginButton = new Button("Login");
         Button createButton = new Button("Create new user");
+        Button closeButton = new Button("Close");
 
         // Nappuloiden toiminta
         loginButton.setOnAction(e -> {
@@ -95,7 +100,11 @@ public class UserInterface extends Application {
             primaryStage.setScene(newUserScene);
         });
 
-        loginPane.getChildren().addAll(loginMessage, inputUsernamePane, inputPasswordPane, loginButton, createButton);
+        closeButton.setOnAction(e -> {
+            primaryStage.close();
+        });
+
+        loginPane.getChildren().addAll(loginMessage, inputUsernamePane, inputPasswordPane, loginButton, createButton, closeButton);
 
         loginScene = new Scene(loginPane, 600, 1000);
 
@@ -176,13 +185,14 @@ public class UserInterface extends Application {
 
         // Selittäviä tekstejä ja syöttökenttiä
         Label infoLabel = new Label("Creating new game... Fill in some information.");
+        Label gameCreationMessage = new Label();
         Label dateLabel = new Label("Date (yyyy-mm-dd):");
         TextField dateInput = new TextField();
         Label opponentLabel = new Label("Opposing team:");
         TextField opponentInput = new TextField();
 
         // Asetellaan
-        infoInputPane.getChildren().addAll(menuLabel, infoLabel, dateLabel, dateInput, opponentLabel, opponentInput);
+        infoInputPane.getChildren().addAll(menuLabel, infoLabel, gameCreationMessage, dateLabel, dateInput, opponentLabel, opponentInput);
 
         // Luodaan napit eteen- ja taaksepäin siirtymiselle
         Button confirmButton = new Button("Create game");
@@ -192,8 +202,14 @@ public class UserInterface extends Application {
         confirmButton.setOnAction(e -> {
             String date = dateInput.getText();
             String opponent = opponentInput.getText();
-            shotChartApp.createNewGame(date, opponent);
-            primaryStage.setScene(newGameScene);
+
+            if (date.length() != 10 || opponent.length() < 2 || opponent.length() > 32) {
+                gameCreationMessage.setText("Insert date as yyyy-mm-dd. Opponent's name has to be between 2-32 characters.");
+                gameCreationMessage.setTextFill(Color.RED);
+            } else {
+                shotChartApp.createNewGame(date, opponent);
+                primaryStage.setScene(newGameScene);
+            }
         });
 
         backButton.setOnAction(e -> {
@@ -204,26 +220,7 @@ public class UserInterface extends Application {
 
         fillNewGameInfoScene = new Scene(infoPane, 600, 1000);
 
-        newGameScene = newGameBase();
-
-        // ----- Luodaan primarystage -----
-        primaryStage.setTitle("ShotCharts Application");
-        primaryStage.setScene(loginScene);
-        primaryStage.show();
-        primaryStage.setOnCloseRequest(e -> {
-            System.out.println("closing");
-            shotChartApp.logout();
-//            Koodi mallina jos halutaan jatkossa tarkistaa esim. onko jokin asia kesken, ennen sulkemista raksista...           
-//            System.out.println(shotChartApp.getLoggedUser());
-//            if (shotChartApp.getLoggedUser() != null) {
-//                e.consume();
-//            }
-
-        });
-
-    }
-
-    public Scene newGameBase() {
+        // ----- Luodaan uuden pelin ikkuna -----
         // Luodaan tyhjä taulu ja piirturi        
         Canvas gameBase = new Canvas(600, 950);
         GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
@@ -245,13 +242,56 @@ public class UserInterface extends Application {
         miss.setToggleGroup(shotTypeButtonGroup);
 
         // Asetetaan nappulat layoutiin
-        VBox shotTypeButtons = new VBox();
-        shotTypeButtons.getChildren().addAll(goal, block, miss);
+        HBox shotTypeButtons = new HBox();
+        shotTypeButtons.setPadding(new Insets(20));
+        // Nappi pelin päättämiselle.
+        Button finishGameButton = new Button("Finish game");
+        shotTypeButtons.getChildren().addAll(goal, block, miss, finishGameButton);
         gameLayout.setTop(shotTypeButtons);
+
+        finishGameButton.setOnAction(e -> {
+            shotChartApp.saveGame();
+            primaryStage.setScene(menuScene);
+        });
+
+        // ----- Luodaan piirto-ominaisuus -----
+        String[][] shotsToDraw = new String[600][950];
+        for (int x = 0; x < shotsToDraw.length; x++) {
+            for (int y = 0; y < shotsToDraw[0].length; y++) {
+                shotsToDraw[x][y] = "";
+            }
+        }
+
+        // Luodaan ensin hiirenkuuntelija                
+        gameBase.setOnMouseClicked(
+                (MouseEvent e) -> {
+                    int x = (int) e.getX();
+                    int y = (int) e.getY();
+
+                    if (shotTypeButtonGroup.getSelectedToggle() == goal) {
+                        shotChartApp.addShot(x, y, "G");
+                        shotsToDraw[x][y] = "G";
+                    }
+                    if (shotTypeButtonGroup.getSelectedToggle() == block) {
+                        shotChartApp.addShot(x, y, "B");
+                        shotsToDraw[x][y] = "B";
+                    }
+                    if (shotTypeButtonGroup.getSelectedToggle() == miss) {
+                        shotChartApp.addShot(x, y, "M");
+                        shotsToDraw[x][y] = "M";
+                    }
+                }
+        );
 
         // Piirretään tyhjä kenttä
         new AnimationTimer() {
+            long previous = 0;
+
             public void handle(long currentNanoTime) {
+                if (currentNanoTime - previous < 100000000) {
+                    return;
+                }
+
                 // Maalataan kentän pohja valkoiseksi
                 gameBaseDrawer.setFill(Color.WHITE);
                 gameBaseDrawer.clearRect(0, 0, 600, 950);
@@ -287,12 +327,31 @@ public class UserInterface extends Application {
                 gameBaseDrawer.fillRect(570, 50, 5, 5);
                 gameBaseDrawer.fillRect(570, 900, 5, 5);
 
-                // Ei piirretä laitoja ainakaan tässä iteraatiossa.              
-            }
-        }.start();
+                // Ei piirretä laitoja ainakaan tässä iteraatiossa.     
+                gameBaseDrawer.setFill(Color.BLACK);
+                for (int x = 0; x < shotsToDraw.length; x++) {
+                    for (int y = 0; y < shotsToDraw[0].length; y++) {
+                        if (!shotsToDraw[x][y].equals("")) {
+                            gameBaseDrawer.fillText(shotsToDraw[x][y], x, y);
+                        }
+                    }
+                }
 
-        // Palautetaan näkymä tyhjästä kentästä
-        return new Scene(gameLayout);
+                this.previous = currentNanoTime;
+            }
+        }
+                .start();
+
+        newGameScene = new Scene(gameLayout, 600, 1000);
+
+        // ----- Luodaan primarystage -----
+        primaryStage.setTitle("ShotCharts Application");
+        primaryStage.setScene(loginScene);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> {
+            System.out.println("closing");
+            shotChartApp.logout();
+        });
     }
 
     @Override
@@ -303,5 +362,4 @@ public class UserInterface extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-
 }
