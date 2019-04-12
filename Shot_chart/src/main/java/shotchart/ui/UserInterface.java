@@ -124,7 +124,7 @@ public class UserInterface extends Application {
             String password = newPasswordInput.getText();
 
             // Tarkistetaan, että tunnukset ovat yli 2 merkkiä pitkät
-            if (username.length() == 2 || password.length() < 2) {
+            if (username.length() < 2 || password.length() < 2) {
                 userCreationMessage.setText("Username or password is too short.");
                 userCreationMessage.setTextFill(Color.RED);
             } else if (shotChartApp.createUser(username, password)) {
@@ -212,10 +212,12 @@ public class UserInterface extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest(e -> {
             System.out.println("closing");
-            System.out.println(shotChartApp.getLoggedUser());
-            if (shotChartApp.getLoggedUser() != null) {
-                e.consume();
-            }
+            shotChartApp.logout();
+//            Koodi mallina jos halutaan jatkossa tarkistaa esim. onko jokin asia kesken, ennen sulkemista raksista...           
+//            System.out.println(shotChartApp.getLoggedUser());
+//            if (shotChartApp.getLoggedUser() != null) {
+//                e.consume();
+//            }
 
         });
 

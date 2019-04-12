@@ -26,6 +26,16 @@ Testikattavuusraportti testaamisen yhteydessä luodaan komennolla
 
 Testikattavuusraporttia voi tarkastella avaamalla selaimella tiedosto */target/site/jacoco/index.html*
 
+### Suoritettavan jarin generointi
+
+Komento
+
+```mvn package```
+
+generoi hakemistoon target suoritettavan jar-tiedoston *ShotChart-1.0-SNAPSHOT.jar.
+
+**Huom. sovellus vaatii toimiakseen config.properties-tiedoston samaan kansioon, missä sovellus sijaitsee.**
+
 ### Checkstyle
 
 Tiedostoon [checkstyle.xml](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla
