@@ -21,8 +21,8 @@ Tekstimuotoinen kuvaus käyttöliittymäluonnoksesta.
 
 ### Ennen kirjautumista
 
-- Sovellukseen voidaan luoda käyttäjätunnus, jonka tulee olla uniikki ja vähintään kolmen merkin pituinen.
-- Käyttäjä voi kirjautua sovellukseen. Käyttäjätunnukseen liittyy myös salasana, joka on vähintään kolmen merkin pituinen. Jos käyttäjää ei ole luotu, järjestelmä ilmoittaa tästä.
+- Sovellukseen voidaan luoda käyttäjätunnus, jonka tulee olla uniikki ja vähintään kahden merkin pituinen.
+- Käyttäjä voi kirjautua sovellukseen. Käyttäjätunnukseen liittyy myös salasana, joka on vähintään kahden merkin pituinen. Jos käyttäjää ei ole luotu, järjestelmä ilmoittaa tästä.
 
 ### Kirjautumisen jälkeen
 
@@ -30,8 +30,9 @@ Tekstimuotoinen kuvaus käyttöliittymäluonnoksesta.
 
 #### Uusi ottelu
 
-- Uusi ottelu avaa tyhjän laukaisukarttapohjan, johon laukaukset merkitään. Sivupalkista valitaan symboli (alkuvaiheessa käytössä *maali*, *torjunta* ja *ohilaukaus*) ja hiirellä klikkaamalla merkitään laukaus karttapohjalle. Ottelun tiedot merkitään yläosan kenttään.
-- Ottelu päätetään alaosan napista, jolloin ottelun laukaisukartta tallentuu järjestelmään ja näkymä palaa valikkoon, johon tullaan kirjautumisen jälkeen.
+- Uusi ottelu avaa lomakkeen, johon syötetään uuden pelin taustatiedot (päivämäärä ja vastustaja). Päivämäärä syötetään muodossa yyyy-mm-dd, vastustajan nimessä saa olla 2-32 kirjainta.
+- Seruaavaksi avautuu tyhjä laukaisukarttapohja, johon laukaukset merkitään. Yläpalkista valitaan symboli (alkuvaiheessa käytössä *maali*, *torjunta* ja *ohilaukaus*) ja hiirellä klikkaamalla merkitään laukaus karttapohjalle.
+- Ottelu päätetään yläosan napista, jolloin ottelun laukaisukartta tallentuu järjestelmään ja näkymä palaa valikkoon, johon tullaan kirjautumisen jälkeen.
 
 #### Vanhojen otteluiden tarkastelu
 
