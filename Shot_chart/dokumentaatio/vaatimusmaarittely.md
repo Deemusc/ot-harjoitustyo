@@ -21,8 +21,8 @@ Tekstimuotoinen kuvaus käyttöliittymäluonnoksesta.
 
 ### Ennen kirjautumista
 
-- Sovellukseen voidaan luoda käyttäjätunnus, jonka tulee olla uniikki.
-- Käyttäjä voi kirjautua sovellukseen. Salasanaa ei vaadita ainakaan alkuvaiheessa. Jos käyttäjää ei ole luotu, järjestelmä ilmoittaa tästä.
+- Sovellukseen voidaan luoda käyttäjätunnus, jonka tulee olla uniikki ja vähintään kolmen merkin pituinen.
+- Käyttäjä voi kirjautua sovellukseen. Käyttäjätunnukseen liittyy myös salasana, joka on vähintään kolmen merkin pituinen. Jos käyttäjää ei ole luotu, järjestelmä ilmoittaa tästä.
 
 ### Kirjautumisen jälkeen
 
