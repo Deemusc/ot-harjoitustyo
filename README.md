@@ -32,7 +32,7 @@ Komento
 
 ```mvn package```
 
-generoi hakemistoon target suoritettavan jar-tiedoston *ShotChart-1.0-SNAPSHOT.jar.
+generoi hakemistoon target suoritettavan jar-tiedoston *ShotChart-1.0-SNAPSHOT.jar.*
 
 **Huom. sovellus vaatii toimiakseen config.properties-tiedoston samaan kansioon, missä sovellus sijaitsee.**
 
