@@ -12,6 +12,10 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 [Työaikakirjanpito](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/tyoaikakirjanpito.md)
 
+## Julkaisut
+
+[Viikko 5](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko5)
+
 ## Komentorivitoiminnot
 
 ### Testaus
