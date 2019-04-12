@@ -21,4 +21,10 @@
  - 3 h / Sovelluslogiikan kehittämistä ja testien luomista.
  - 1 h / Jacoco, checkstylet yms. kuntoon ja repositorio siistiksi.
 
-**Yhteensä: 18 tuntia**
+#### Viikko 5
+
+**Pe 12.4.**
+ - 3 h / Graafisen käyttöliittymän kehittämistä, laukausten piirtäminen.
+ - 1 h / Sovelluslogiikan kehittämistä, laukausten tallentaminen.
+
+**Yhteensä: 22 tuntia**
