@@ -2,6 +2,7 @@ package shotchart.dao;
 
 // @deemus
 
+import java.util.ArrayList;
 import java.util.List;
 import shotchart.domain.ShotChart;
 
@@ -11,6 +12,6 @@ public interface ShotChartDao {
 
     ShotChart update(ShotChart shotChart) throws Exception;
     
-    List<ShotChart> getAll();
+    ArrayList<ShotChart> getAll();
         
 }

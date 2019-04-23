@@ -88,9 +88,21 @@ public class ShotChartApp {
         }
         return true;
     }
-    
-    public List<ShotChart> getShotCharts() {
-        return shotChartDao.getAll();        
+
+    // metodi, joka palauttaa kaikki kirjautuneena olevan käyttäjän laukaisukartat
+    public ArrayList<ShotChart> getShotCharts() {
+        ArrayList<ShotChart> charts = new ArrayList<>();
+        ArrayList<ShotChart> allCharts = shotChartDao.getAll();
+
+        if (loggedIn != null) {
+            for (int i = 0; i < allCharts.size(); i++) {
+                if (allCharts.get(i).getUser().getUsername().equals(loggedIn.getUsername())) {
+                    charts.add(allCharts.get(i));
+                }
+            }
+        }
+
+        return charts;
     }
-    
+
 }

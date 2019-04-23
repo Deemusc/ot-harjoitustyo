@@ -79,7 +79,7 @@ public class FileShotChartDao implements ShotChartDao {
     }
 
     @Override
-    public List<ShotChart> getAll() {
+    public ArrayList<ShotChart> getAll() {
         return shotCharts;
     }
 

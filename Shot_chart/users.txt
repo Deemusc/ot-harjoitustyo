@@ -2,3 +2,6 @@ deemu;deemu
 nallet;nallet
 a;34rr
 botnia;antti
+ifk;ifk
+kärpät;pallo
+tappara;ojanen
