@@ -21,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import shotchart.dao.FileShotChartDao;
@@ -37,6 +38,7 @@ public class UserInterface extends Application {
     private Scene loginScene;
     private Scene newGameScene;
     private Scene fillNewGameInfoScene;
+    private Scene listPreviousGamesScene;
 
     private final Label menuLabel = new Label("Shot chart application - v.0.3");
 
@@ -167,6 +169,11 @@ public class UserInterface extends Application {
         newGameButton.setOnAction(e -> {
             primaryStage.setScene(fillNewGameInfoScene);
         });
+        
+        // Vanhojen pelien tarkastelu -napin painalluksen käsittely
+        viewGamesButton.setOnAction(e -> {
+            primaryStage.setScene(listPreviousGamesScene);
+        });        
 
         // Logout-napin painalluksen käsittely
         logoutButton.setOnAction(e -> {
@@ -220,6 +227,21 @@ public class UserInterface extends Application {
 
         fillNewGameInfoScene = new Scene(infoPane, 600, 1000);
 
+        // ----- Luodaan vanhojen otteluiden listausikkuna -----
+        VBox listGamesPane = new VBox(20);
+        HBox listGamesInfoPane = new HBox(20);
+        listGamesPane.setPadding(new Insets(10));
+        
+        Text listGamesTitle = new Text("Choose game to review");
+        listGamesTitle.setStyle("-fx-font-size: 18px;");
+        Label gameDateInfoLabel = new Label("Date of game");
+        Label opponentInfoLabel = new Label("Opponent");
+        listGamesInfoPane.getChildren().addAll(gameDateInfoLabel, opponentInfoLabel);
+        listGamesPane.getChildren().addAll(listGamesTitle, listGamesInfoPane);
+        
+        
+        listPreviousGamesScene = new Scene(listGamesPane, 600, 1000);
+        
         // ----- Luodaan uuden pelin ikkuna -----
         // Luodaan tyhjä taulu ja piirturi        
         Canvas gameBase = new Canvas(600, 950);

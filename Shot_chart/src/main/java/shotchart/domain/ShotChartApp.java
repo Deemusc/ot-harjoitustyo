@@ -2,6 +2,7 @@ package shotchart.domain;
 
 // @deemusc
 import java.util.ArrayList;
+import java.util.List;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -87,4 +88,9 @@ public class ShotChartApp {
         }
         return true;
     }
+    
+    public List<ShotChart> getShotCharts() {
+        return shotChartDao.getAll();        
+    }
+    
 }
