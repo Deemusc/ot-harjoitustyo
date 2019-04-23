@@ -41,6 +41,8 @@ public class UserInterface extends Application {
     private Scene newGameScene;
     private Scene fillNewGameInfoScene;
     private Scene listPreviousGamesScene;
+    
+    private ArrayList<ShotChart> previousCharts = new ArrayList<>();
 
     private final Label menuLabel = new Label("Shot chart application - v.0.3");
 
@@ -67,6 +69,67 @@ public class UserInterface extends Application {
 
         menuScene = createMainmenuScene(primaryStage);
 
+        fillNewGameInfoScene = createNewGameInfoScene(primaryStage);
+
+        //listPreviousGamesScene = createGamesListScene(primaryStage);
+
+        newGameScene = createNewGameScene(primaryStage);
+
+        // ----- Luodaan primarystage -----
+        primaryStage.setTitle("ShotCharts Application");
+        primaryStage.setScene(loginScene);
+        primaryStage.show();
+        primaryStage.setOnCloseRequest(e -> {
+            System.out.println("closing");
+            shotChartApp.logout();
+        });
+    }
+
+    public void listShotCharts() {
+        previousCharts = shotChartApp.getShotCharts();
+        System.out.println(previousCharts);
+    }
+    
+    // metodi, joka luo ikkunan vanhojen pelien listaukseen
+    public Scene createGamesListScene(Stage primaryStage) {
+        // ----- Luodaan vanhojen otteluiden listausikkuna -----
+        VBox listGamesPane = new VBox(20);
+        HBox listGamesInfoPane = new HBox(20);
+        listGamesPane.setPadding(new Insets(10));
+
+        Text listGamesTitle = new Text("Choose game to review");
+        listGamesTitle.setStyle("-fx-font-size: 18px;");
+        Label gameDateInfoLabel = new Label("Date of game");
+        Label opponentInfoLabel = new Label("Opponent");
+        listGamesInfoPane.getChildren().addAll(gameDateInfoLabel, opponentInfoLabel);
+        listGamesPane.getChildren().addAll(listGamesTitle, listGamesInfoPane);
+        
+        if (previousCharts.isEmpty()) {
+            Label noPreviousGamesLabel = new Label("No previous games.");
+            listGamesPane.getChildren().addAll(noPreviousGamesLabel);
+        }
+
+        for (int i = 0; i < previousCharts.size(); i++) {
+            Label gameDate = new Label(previousCharts.get(i).getDate());
+            Label gameOpponent = new Label(previousCharts.get(i).getOpponent());
+
+            HBox gameDetailsPane = new HBox(20);
+            gameDetailsPane.getChildren().addAll(gameDate, gameOpponent);
+            listGamesPane.getChildren().addAll(gameDetailsPane);
+        }
+
+        Button backFromGamesButton = new Button("Back to menu");
+        backFromGamesButton.setOnAction(e -> {
+            primaryStage.setScene(menuScene);
+        });
+
+        listGamesPane.getChildren().addAll(backFromGamesButton);
+
+        return new Scene(listGamesPane, 600, 1000);
+    }
+
+    // metodi, joka luo ikkunan uuden pelin tietojen syöttämistä varten
+    public Scene createNewGameInfoScene(Stage primaryStage) {
         // ----- Luodaan ikkuna uuden pelin tietojen syöttämiselle -----
         VBox infoPane = new VBox(20);
         VBox infoInputPane = new VBox(20);
@@ -107,55 +170,7 @@ public class UserInterface extends Application {
 
         infoPane.getChildren().addAll(infoInputPane, confirmButton, backButton);
 
-        fillNewGameInfoScene = new Scene(infoPane, 600, 1000);
-
-        // ----- Luodaan vanhojen otteluiden listausikkuna -----
-        VBox listGamesPane = new VBox(20);
-        HBox listGamesInfoPane = new HBox(20);
-        listGamesPane.setPadding(new Insets(10));
-
-        Text listGamesTitle = new Text("Choose game to review");
-        listGamesTitle.setStyle("-fx-font-size: 18px;");
-        Label gameDateInfoLabel = new Label("Date of game");
-        Label opponentInfoLabel = new Label("Opponent");
-        listGamesInfoPane.getChildren().addAll(gameDateInfoLabel, opponentInfoLabel);
-        listGamesPane.getChildren().addAll(listGamesTitle, listGamesInfoPane);
-
-        ArrayList<ShotChart> previousCharts = shotChartApp.getShotCharts();
-
-        if (previousCharts.isEmpty()) {
-            Label noPreviousGamesLabel = new Label("No previous games.");
-            listGamesPane.getChildren().addAll(noPreviousGamesLabel);
-        }
-
-        for (int i = 0; i < previousCharts.size(); i++) {
-            Label gameDate = new Label(previousCharts.get(i).getDate());
-            Label gameOpponent = new Label(previousCharts.get(i).getOpponent());
-
-            HBox gameDetailsPane = new HBox(20);
-            gameDetailsPane.getChildren().addAll(gameDate, gameOpponent);
-            listGamesPane.getChildren().addAll(gameDetailsPane);
-        }
-
-        Button backFromGamesButton = new Button("Back to menu");
-        backFromGamesButton.setOnAction(e -> {
-            primaryStage.setScene(menuScene);
-        });
-
-        listGamesPane.getChildren().addAll(backFromGamesButton);
-
-        listPreviousGamesScene = new Scene(listGamesPane, 600, 1000);
-
-        newGameScene = createNewGameScene(primaryStage);
-
-        // ----- Luodaan primarystage -----
-        primaryStage.setTitle("ShotCharts Application");
-        primaryStage.setScene(loginScene);
-        primaryStage.show();
-        primaryStage.setOnCloseRequest(e -> {
-            System.out.println("closing");
-            shotChartApp.logout();
-        });
+        return new Scene(infoPane, 600, 1000);
     }
 
     // metodi, joka luo päävalikon ikkunan
@@ -176,8 +191,8 @@ public class UserInterface extends Application {
 
         // Vanhojen pelien tarkastelu -napin painalluksen käsittely
         viewGamesButton.setOnAction(e -> {
-
-            primaryStage.setScene(listPreviousGamesScene);
+            listShotCharts();
+            primaryStage.setScene(createGamesListScene(primaryStage));
         });
 
         // Logout-napin painalluksen käsittely

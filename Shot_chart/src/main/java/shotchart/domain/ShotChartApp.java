@@ -94,13 +94,13 @@ public class ShotChartApp {
         ArrayList<ShotChart> charts = new ArrayList<>();
         ArrayList<ShotChart> allCharts = shotChartDao.getAll();
 
-        if (loggedIn != null) {
+        //if (loggedIn != null) {
             for (int i = 0; i < allCharts.size(); i++) {
                 if (allCharts.get(i).getUser().getUsername().equals(loggedIn.getUsername())) {
                     charts.add(allCharts.get(i));
                 }
             }
-        }
+        //}
 
         return charts;
     }
