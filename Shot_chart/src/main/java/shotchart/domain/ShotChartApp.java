@@ -99,6 +99,11 @@ public class ShotChartApp {
     public void addShot(int x, int y, String type) {
         shotChart.addShot(x, y, type);
     }
+    
+    public Shot deleteShot(int x, int y) {
+        return shotChart.deleteShot(x, y);
+    }
+    
 
     // haetaan ensin haluttu laukaisukartta id:n perusteella ja poistetaan sitten
     public boolean deleteGameById(int id) {

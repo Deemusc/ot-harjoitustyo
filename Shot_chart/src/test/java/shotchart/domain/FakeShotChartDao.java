@@ -6,14 +6,14 @@ import shotchart.dao.ShotChartDao;
 
 public class FakeShotChartDao implements ShotChartDao {
 
-    List<ShotChart> shotcharts;
+    ArrayList<ShotChart> shotcharts;
 
     public FakeShotChartDao() {
         shotcharts = new ArrayList<>();
     }
 
     @Override
-    public List<ShotChart> getAll() {
+    public ArrayList<ShotChart> getAll() {
         return shotcharts;
     }
 
@@ -37,5 +37,15 @@ public class FakeShotChartDao implements ShotChartDao {
             shotcharts.add(shotChart);
         }
         return shotChart;
+    }
+
+    @Override
+    public void delete(ShotChart shotChart) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ShotChart getChart(int id) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

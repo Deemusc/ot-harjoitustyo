@@ -452,6 +452,8 @@ public class UserInterface extends Application {
         block.setToggleGroup(shotTypeButtonGroup);
         RadioButton miss = new RadioButton("Missed shot");
         miss.setToggleGroup(shotTypeButtonGroup);
+        RadioButton erase = new RadioButton("Erase");
+        erase.setToggleGroup(shotTypeButtonGroup);
 
         // Asetetaan nappulat layoutiin
         HBox shotTypeButtons = new HBox();
@@ -459,7 +461,7 @@ public class UserInterface extends Application {
         // Nappi pelin päättämiselle.
         Button finishGameButton = new Button("Finish game");
         Button cancelButton = new Button("Cancel");
-        shotTypeButtons.getChildren().addAll(goal, block, miss, finishGameButton, cancelButton);
+        shotTypeButtons.getChildren().addAll(goal, block, miss, erase, finishGameButton, cancelButton);
         gameLayout.setTop(shotTypeButtons);
 
         finishGameButton.setOnAction(e -> {
@@ -490,6 +492,14 @@ public class UserInterface extends Application {
                         shotChartApp.addShot(x, y, "M");
                         shotsToDraw[x][y] = "M";
                     }
+                    if (shotTypeButtonGroup.getSelectedToggle() == erase) {
+
+                        Shot shotToErase = shotChartApp.deleteShot(x, y);
+                        if (shotToErase != null) {
+                            shotsToDraw[shotToErase.getX()][shotToErase.getY()] = "";
+                        }
+                    }
+
                 }
         );
 

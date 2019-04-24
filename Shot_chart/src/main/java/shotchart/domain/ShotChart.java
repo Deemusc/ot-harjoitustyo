@@ -43,6 +43,21 @@ public class ShotChart {
         this.shots.add(new Shot(x, y, type));
     }
 
+    public Shot deleteShot(int x, int y) {
+        Shot returnable = null;
+        int index = -1;
+        for (int i = 0; i < shots.size(); i++) {
+            if ((shots.get(i).getX() > x-10 && shots.get(i).getX() < x+10) && (shots.get(i).getY() > y-10 && shots.get(i).getY() < y+10)) {
+                index = i;
+            }
+        }
+        if (index != -1) {
+            returnable = shots.get(index);
+            shots.remove(index);
+        }
+        return returnable;
+    }
+
     public int getId() {
         return id;
     }
@@ -113,6 +128,5 @@ public class ShotChart {
         }
         return Objects.equals(this.opponent, other.opponent);
     }
-
 
 }
