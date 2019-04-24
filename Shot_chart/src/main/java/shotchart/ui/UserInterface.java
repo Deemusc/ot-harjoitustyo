@@ -61,7 +61,7 @@ public class UserInterface extends Application {
     // varsinainen graafisen UI:n käynnistys
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+
         // kutsutaan ikkunoita luovia metodeja
         loginScene = createLoginScene(primaryStage);
         newUserScene = createNewUserScene(primaryStage);
@@ -83,34 +83,10 @@ public class UserInterface extends Application {
         previousCharts = shotChartApp.getShotCharts();
     }
 
-    // metodi, joka piirtää tietyn pelin laukaukset kartalle
-    public Scene showChosenGame(Stage primaryStage, int id) {
-
-        shotsToDraw = shotChartApp.getShots(id);
-
-        // Luodaan tyhjä taulu ja piirturi        
+    // metodi, joka piirtä kentän ja sen laukaukset
+    public Canvas drawChart() {
         Canvas gameBase = new Canvas(600, 950);
         GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
-
-        // Asetellaan ne
-        BorderPane gameLayout = new BorderPane();
-        gameLayout.setCenter(gameBase);
-
-        Button backToGameListButton = new Button("Back to list");
-        Button deleteButton = new Button("Delete game");
-        HBox detailViewButtons = new HBox(20);
-        detailViewButtons.getChildren().addAll(backToGameListButton, deleteButton);
-        gameLayout.setTop(detailViewButtons);
-
-        backToGameListButton.setOnAction(e -> {
-            primaryStage.setScene(createGamesListScene(primaryStage));
-        });
-
-        deleteButton.setOnAction(e -> {
-            shotChartApp.deleteGameById(id);
-            listShotCharts();
-            primaryStage.setScene(createGamesListScene(primaryStage));
-        });
 
         // Piirretään kenttä
         new AnimationTimer() {
@@ -169,6 +145,37 @@ public class UserInterface extends Application {
             }
         }
                 .start();
+
+        return gameBase;
+    }
+
+    // metodi, joka piirtää tietyn pelin laukaukset kartalle
+    public Scene showChosenGame(Stage primaryStage, int id) {
+
+        // haetaan laukaisukartan laukaukset
+        shotsToDraw = shotChartApp.getShots(id);
+
+        // kutsutaan metodia, joka piirtää kentän ja asetellaan metodin palauttama taulu
+        BorderPane gameLayout = new BorderPane();
+        gameLayout.setCenter(drawChart());
+
+        // luodaan nappulat paluuseen ja poistamiseen
+        Button backToGameListButton = new Button("Back to list");
+        Button deleteButton = new Button("Delete game");
+        HBox detailViewButtons = new HBox(20);
+        detailViewButtons.getChildren().addAll(backToGameListButton, deleteButton);
+        gameLayout.setTop(detailViewButtons);
+
+        // käsitellään nappuloiden painallukset
+        backToGameListButton.setOnAction(e -> {
+            primaryStage.setScene(createGamesListScene(primaryStage));
+        });
+
+        deleteButton.setOnAction(e -> {
+            shotChartApp.deleteGameById(id);
+            listShotCharts();
+            primaryStage.setScene(createGamesListScene(primaryStage));
+        });
 
         return new Scene(gameLayout, 600, 1000);
     }
@@ -414,6 +421,7 @@ public class UserInterface extends Application {
         return new Scene(loginPane, 600, 1000);
     }
 
+    // metodi, joka tyhjentää kartan laukauksista
     public void clearChart() {
         shotsToDraw = new String[600][950];
     }
@@ -421,11 +429,7 @@ public class UserInterface extends Application {
     // metodi, joka luo uudelle pelille kentän ja huolehtii laukausten piirtämisestä
     public Scene createNewGameScene(Stage primaryStage) {
         // ----- Luodaan uuden pelin ikkuna -----
-        // Luodaan tyhjä taulu ja piirturi        
-        Canvas gameBase = new Canvas(600, 950);
-        GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
 
-        // ----- Luodaan piirto-ominaisuus -----
         clearChart();
         for (int x = 0; x < shotsToDraw.length; x++) {
             for (int y = 0; y < shotsToDraw[0].length; y++) {
@@ -434,6 +438,7 @@ public class UserInterface extends Application {
         }
 
         // Asetellaan ne
+        Canvas gameBase = drawChart();
         BorderPane gameLayout = new BorderPane();
         gameLayout.setCenter(gameBase);
 
@@ -499,63 +504,6 @@ public class UserInterface extends Application {
                 }
         );
 
-        // Piirretään kenttä
-        new AnimationTimer() {
-            long previous = 0;
-
-            public void handle(long currentNanoTime) {
-                if (currentNanoTime - previous < 100000000) {
-                    return;
-                }
-
-                // Maalataan kentän pohja valkoiseksi
-                gameBaseDrawer.setFill(Color.WHITE);
-                gameBaseDrawer.clearRect(0, 0, 600, 950);
-                gameBaseDrawer.fillRect(0, 0, 600, 950);
-
-                // Piirretään kentän viivat harmaalla
-                gameBaseDrawer.setFill(Color.LIGHTGRAY);
-
-                // Keskiviiva
-                gameBaseDrawer.fillRect(0, 475, 600, 5);
-
-                // Ylempi maalivahdinalue
-                gameBaseDrawer.fillRect(250, 50, 100, 5);
-                gameBaseDrawer.fillRect(250, 125, 100, 5);
-                gameBaseDrawer.fillRect(250, 50, 5, 75);
-                gameBaseDrawer.fillRect(350, 50, 5, 80);
-                gameBaseDrawer.fillRect(270, 70, 60, 5);
-                gameBaseDrawer.fillRect(270, 50, 5, 20);
-                gameBaseDrawer.fillRect(330, 50, 5, 25);
-
-                // Alempi maalivahdinalue
-                gameBaseDrawer.fillRect(250, 900, 100, 5);
-                gameBaseDrawer.fillRect(250, 825, 100, 5);
-                gameBaseDrawer.fillRect(250, 825, 5, 75);
-                gameBaseDrawer.fillRect(350, 825, 5, 80);
-                gameBaseDrawer.fillRect(270, 880, 60, 5);
-                gameBaseDrawer.fillRect(270, 880, 5, 20);
-                gameBaseDrawer.fillRect(330, 880, 5, 25);
-
-                // Kulmapisteet
-                gameBaseDrawer.fillRect(25, 50, 5, 5);
-                gameBaseDrawer.fillRect(25, 900, 5, 5);
-                gameBaseDrawer.fillRect(570, 50, 5, 5);
-                gameBaseDrawer.fillRect(570, 900, 5, 5);
-
-                // Piirretään laukauksia.    
-                gameBaseDrawer.setFill(Color.BLACK);
-                for (int x = 0; x < shotsToDraw.length; x++) {
-                    for (int y = 0; y < shotsToDraw[0].length; y++) {
-                        if (!shotsToDraw[x][y].equals("")) {
-                            gameBaseDrawer.fillText(shotsToDraw[x][y], x, y);
-                        }
-                    }
-                }
-                this.previous = currentNanoTime;
-            }
-        }
-                .start();
         return new Scene(gameLayout, 600, 1000);
     }
 
