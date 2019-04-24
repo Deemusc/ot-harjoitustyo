@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Properties;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -41,8 +43,9 @@ public class UserInterface extends Application {
     private Scene newGameScene;
     private Scene fillNewGameInfoScene;
     private Scene listPreviousGamesScene;
-    
+
     private ArrayList<ShotChart> previousCharts = new ArrayList<>();
+    private String[][] shotsToDraw = new String[600][950];
 
     private final Label menuLabel = new Label("Shot chart application - v.0.3");
 
@@ -71,9 +74,7 @@ public class UserInterface extends Application {
 
         fillNewGameInfoScene = createNewGameInfoScene(primaryStage);
 
-        //listPreviousGamesScene = createGamesListScene(primaryStage);
-
-        newGameScene = createNewGameScene(primaryStage);
+        //newGameScene = createNewGameScene(primaryStage);
 
         // ----- Luodaan primarystage -----
         primaryStage.setTitle("ShotCharts Application");
@@ -85,11 +86,16 @@ public class UserInterface extends Application {
         });
     }
 
+    // metodi, joka hakee käyttäjän laukaisukartat kutsuttaessa
     public void listShotCharts() {
         previousCharts = shotChartApp.getShotCharts();
-        System.out.println(previousCharts);
     }
-    
+
+    public Scene showChosenGame(Stage primaryStage, int id) {
+        System.out.println(id);
+        return null;
+    }
+
     // metodi, joka luo ikkunan vanhojen pelien listaukseen
     public Scene createGamesListScene(Stage primaryStage) {
         // ----- Luodaan vanhojen otteluiden listausikkuna -----
@@ -103,19 +109,33 @@ public class UserInterface extends Application {
         Label opponentInfoLabel = new Label("Opponent");
         listGamesInfoPane.getChildren().addAll(gameDateInfoLabel, opponentInfoLabel);
         listGamesPane.getChildren().addAll(listGamesTitle, listGamesInfoPane);
-        
+
         if (previousCharts.isEmpty()) {
             Label noPreviousGamesLabel = new Label("No previous games.");
             listGamesPane.getChildren().addAll(noPreviousGamesLabel);
         }
 
+        //ArrayList<Label> gamesLabelList = new ArrayList<>();
+        //ArrayList<Label> opponentsLabelList = new ArrayList<>();
+        //ArrayList<Button> chartButtonList = new ArrayList<>();
         for (int i = 0; i < previousCharts.size(); i++) {
+            //gamesLabelList.add(new Label(previousCharts.get(i).getDate()));            
+            //opponentsLabelList.add(new Label(previousCharts.get(i).getOpponent()));
+            //chartButtonList.add(new Button("Show shotchart"));                        
+
             Label gameDate = new Label(previousCharts.get(i).getDate());
             Label gameOpponent = new Label(previousCharts.get(i).getOpponent());
+            Button gameDetailsButton = new Button("Show shotchart");
+
+            final int gameId = previousCharts.get(i).getId();
+            gameDetailsButton.setOnAction(e -> {
+                showChosenGame(primaryStage, gameId);
+            });
 
             HBox gameDetailsPane = new HBox(20);
-            gameDetailsPane.getChildren().addAll(gameDate, gameOpponent);
+            gameDetailsPane.getChildren().addAll(gameDate, gameOpponent, gameDetailsButton);
             listGamesPane.getChildren().addAll(gameDetailsPane);
+
         }
 
         Button backFromGamesButton = new Button("Back to menu");
@@ -160,7 +180,9 @@ public class UserInterface extends Application {
                 gameCreationMessage.setTextFill(Color.RED);
             } else {
                 shotChartApp.createNewGame(date, opponent);
-                primaryStage.setScene(newGameScene);
+                dateInput.setText("");
+                opponentInput.setText("");                
+                primaryStage.setScene(createNewGameScene(primaryStage));
             }
         });
 
@@ -190,6 +212,7 @@ public class UserInterface extends Application {
         });
 
         // Vanhojen pelien tarkastelu -napin painalluksen käsittely
+        // haetaan ensin laukaisukartat ja sen jälkeen luodaan listausikkuna
         viewGamesButton.setOnAction(e -> {
             listShotCharts();
             primaryStage.setScene(createGamesListScene(primaryStage));
@@ -321,12 +344,24 @@ public class UserInterface extends Application {
         return new Scene(loginPane, 600, 1000);
     }
 
+    public void clearChart() {
+        shotsToDraw = new String[600][950];
+    }
+
     // metodi, joka luo uudelle pelille kentän ja huolehtii laukausten piirtämisestä
     public Scene createNewGameScene(Stage primaryStage) {
         // ----- Luodaan uuden pelin ikkuna -----
         // Luodaan tyhjä taulu ja piirturi        
         Canvas gameBase = new Canvas(600, 950);
         GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
+
+        // ----- Luodaan piirto-ominaisuus -----
+        clearChart();
+        for (int x = 0; x < shotsToDraw.length; x++) {
+            for (int y = 0; y < shotsToDraw[0].length; y++) {
+                shotsToDraw[x][y] = "";
+            }
+        }
 
         // Asetellaan ne
         BorderPane gameLayout = new BorderPane();
@@ -353,17 +388,9 @@ public class UserInterface extends Application {
         gameLayout.setTop(shotTypeButtons);
 
         finishGameButton.setOnAction(e -> {
-            shotChartApp.saveGame();
+            shotChartApp.saveGame();          
             primaryStage.setScene(menuScene);
         });
-
-        // ----- Luodaan piirto-ominaisuus -----
-        String[][] shotsToDraw = new String[600][950];
-        for (int x = 0; x < shotsToDraw.length; x++) {
-            for (int y = 0; y < shotsToDraw[0].length; y++) {
-                shotsToDraw[x][y] = "";
-            }
-        }
 
         // Luodaan hiirenkuuntelija                
         gameBase.setOnMouseClicked(
