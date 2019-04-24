@@ -40,9 +40,7 @@ public class UserInterface extends Application {
     private Scene menuScene;
     private Scene newUserScene;
     private Scene loginScene;
-    private Scene newGameScene;
     private Scene fillNewGameInfoScene;
-    private Scene listPreviousGamesScene;
 
     private ArrayList<ShotChart> previousCharts = new ArrayList<>();
     private String[][] shotsToDraw = new String[600][950];
@@ -114,6 +112,7 @@ public class UserInterface extends Application {
 
         deleteButton.setOnAction(e -> {
             shotChartApp.deleteGameById(id);
+            listShotCharts();
             primaryStage.setScene(createGamesListScene(primaryStage));
         });
 
