@@ -36,8 +36,7 @@ public class FileShotChartDao implements ShotChartDao {
                 shotCharts.add(shotChart);
             }
         } catch (Exception e) {
-            FileWriter writer = new FileWriter(new File(file));
-            System.out.println("täälläkö moka?");
+            FileWriter writer = new FileWriter(new File(file));            
             writer.close();
         }
     }

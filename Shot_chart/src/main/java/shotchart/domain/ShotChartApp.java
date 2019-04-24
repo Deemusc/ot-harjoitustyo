@@ -1,6 +1,6 @@
 package shotchart.domain;
 
-// @deemusc
+// @deemus
 import java.util.ArrayList;
 import java.util.List;
 import javafx.animation.AnimationTimer;

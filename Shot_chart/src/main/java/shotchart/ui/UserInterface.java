@@ -500,7 +500,6 @@ public class UserInterface extends Application {
                             shotsToDraw[shotToErase.getX()][shotToErase.getY()] = "";
                         }
                     }
-
                 }
         );
 
