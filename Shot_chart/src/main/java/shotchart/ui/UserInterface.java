@@ -1,14 +1,13 @@
+// author: @deemus
+// pakkaus
 package shotchart.ui;
 
-// @deemus
+// tuodaan tarvittavat importit
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -26,7 +25,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import shotchart.dao.FileShotChartDao;
 import shotchart.dao.FileUserDao;
 import shotchart.domain.Shot;
@@ -35,22 +33,21 @@ import shotchart.domain.ShotChartApp;
 
 public class UserInterface extends Application {
 
+    // tarvittavia muuttujia
     private ShotChartApp shotChartApp;
-
     private Scene menuScene;
     private Scene newUserScene;
     private Scene loginScene;
     private Scene fillNewGameInfoScene;
-
     private ArrayList<ShotChart> previousCharts = new ArrayList<>();
     private String[][] shotsToDraw = new String[600][950];
 
     private final Label menuLabel = new Label("Shot chart application - v.0.3");
 
+    // alustusmetodi
     @Override
     public void init() throws Exception {
         Properties properties = new Properties();
-
         properties.load(new FileInputStream("config.properties"));
 
         String userFile = properties.getProperty("userFile");
@@ -61,15 +58,14 @@ public class UserInterface extends Application {
         shotChartApp = new ShotChartApp(shotChartDao, userDao);
     }
 
+    // varsinainen graafisen UI:n käynnistys
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        
+        // kutsutaan ikkunoita luovia metodeja
         loginScene = createLoginScene(primaryStage);
-
         newUserScene = createNewUserScene(primaryStage);
-
         menuScene = createMainmenuScene(primaryStage);
-
         fillNewGameInfoScene = createNewGameInfoScene(primaryStage);
 
         // ----- Luodaan primarystage -----
