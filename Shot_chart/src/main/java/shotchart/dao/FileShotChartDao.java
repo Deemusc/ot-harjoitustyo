@@ -29,14 +29,15 @@ public class FileShotChartDao implements ShotChartDao {
                 String opponent = parts[2];
                 User user = users.getAll().stream().filter(u -> u.getUsername().equals(parts[3])).findFirst().orElse(null);
                 ArrayList<Shot> shots = new ArrayList<>();
-                for (int i = 5; i < parts.length; i += 3) {
-                    shots.add(new Shot(i + 1, i + 2, parts[i]));
+                for (int i = 4; i < parts.length; i += 3) {
+                    shots.add(new Shot(Integer.parseInt(parts[i + 1]), Integer.parseInt(parts[i + 2]), parts[i]));
                 }
                 ShotChart shotChart = new ShotChart(id, date, opponent, user, shots);
                 shotCharts.add(shotChart);
             }
         } catch (Exception e) {
             FileWriter writer = new FileWriter(new File(file));
+            System.out.println("täälläkö moka?");
             writer.close();
         }
     }
@@ -54,6 +55,30 @@ public class FileShotChartDao implements ShotChartDao {
         return shotCharts.size() + 1;
     }
 
+    @Override
+    public void delete(ShotChart shotChart) throws Exception {
+        int index = -1;
+        for (int i = 0; i < shotCharts.size(); i++) {
+            if (shotCharts.get(i).getId() == shotChart.getId()) {
+                index = i;
+            }
+        }
+        if (index != -1) {
+            shotCharts.remove(index);            
+            save();
+        }
+    }
+
+    @Override
+    public ShotChart getChart(int id) throws Exception {
+        for (int i = 0; i < shotCharts.size(); i++) {
+            if (shotCharts.get(i).getId() == id) {
+                return shotCharts.get(i);
+            }
+        }
+        return null;
+    }
+    
     @Override
     public ShotChart update(ShotChart shotChart) throws Exception {
         int index = -1;

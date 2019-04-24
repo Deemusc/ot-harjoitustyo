@@ -113,4 +113,6 @@ public class ShotChart {
         }
         return Objects.equals(this.opponent, other.opponent);
     }
+
+
 }

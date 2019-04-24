@@ -12,6 +12,10 @@ public interface ShotChartDao {
 
     ShotChart update(ShotChart shotChart) throws Exception;
     
+    void delete(ShotChart shotChart) throws Exception;
+    
+    ShotChart getChart(int id) throws Exception;
+    
     ArrayList<ShotChart> getAll();
         
 }

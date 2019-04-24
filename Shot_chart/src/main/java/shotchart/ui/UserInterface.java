@@ -74,8 +74,6 @@ public class UserInterface extends Application {
 
         fillNewGameInfoScene = createNewGameInfoScene(primaryStage);
 
-        //newGameScene = createNewGameScene(primaryStage);
-
         // ----- Luodaan primarystage -----
         primaryStage.setTitle("ShotCharts Application");
         primaryStage.setScene(loginScene);
@@ -91,9 +89,93 @@ public class UserInterface extends Application {
         previousCharts = shotChartApp.getShotCharts();
     }
 
+    // metodi, joka piirtää tietyn pelin laukaukset kartalle
     public Scene showChosenGame(Stage primaryStage, int id) {
-        System.out.println(id);
-        return null;
+
+        shotsToDraw = shotChartApp.getShots(id);
+
+        // Luodaan tyhjä taulu ja piirturi        
+        Canvas gameBase = new Canvas(600, 950);
+        GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
+
+        // Asetellaan ne
+        BorderPane gameLayout = new BorderPane();
+        gameLayout.setCenter(gameBase);
+
+        Button backToGameListButton = new Button("Back to list");
+        Button deleteButton = new Button("Delete game");
+        HBox detailViewButtons = new HBox(20);
+        detailViewButtons.getChildren().addAll(backToGameListButton, deleteButton);
+        gameLayout.setTop(detailViewButtons);
+
+        backToGameListButton.setOnAction(e -> {
+            primaryStage.setScene(createGamesListScene(primaryStage));
+        });
+
+        deleteButton.setOnAction(e -> {
+            shotChartApp.deleteGameById(id);
+            primaryStage.setScene(createGamesListScene(primaryStage));
+        });
+
+        // Piirretään kenttä
+        new AnimationTimer() {
+            long previous = 0;
+
+            public void handle(long currentNanoTime) {
+                if (currentNanoTime - previous < 100000000) {
+                    return;
+                }
+
+                // Maalataan kentän pohja valkoiseksi
+                gameBaseDrawer.setFill(Color.WHITE);
+                gameBaseDrawer.clearRect(0, 0, 600, 950);
+                gameBaseDrawer.fillRect(0, 0, 600, 950);
+
+                // Piirretään kentän viivat harmaalla
+                gameBaseDrawer.setFill(Color.LIGHTGRAY);
+
+                // Keskiviiva
+                gameBaseDrawer.fillRect(0, 475, 600, 5);
+
+                // Ylempi maalivahdinalue
+                gameBaseDrawer.fillRect(250, 50, 100, 5);
+                gameBaseDrawer.fillRect(250, 125, 100, 5);
+                gameBaseDrawer.fillRect(250, 50, 5, 75);
+                gameBaseDrawer.fillRect(350, 50, 5, 80);
+                gameBaseDrawer.fillRect(270, 70, 60, 5);
+                gameBaseDrawer.fillRect(270, 50, 5, 20);
+                gameBaseDrawer.fillRect(330, 50, 5, 25);
+
+                // Alempi maalivahdinalue
+                gameBaseDrawer.fillRect(250, 900, 100, 5);
+                gameBaseDrawer.fillRect(250, 825, 100, 5);
+                gameBaseDrawer.fillRect(250, 825, 5, 75);
+                gameBaseDrawer.fillRect(350, 825, 5, 80);
+                gameBaseDrawer.fillRect(270, 880, 60, 5);
+                gameBaseDrawer.fillRect(270, 880, 5, 20);
+                gameBaseDrawer.fillRect(330, 880, 5, 25);
+
+                // Kulmapisteet
+                gameBaseDrawer.fillRect(25, 50, 5, 5);
+                gameBaseDrawer.fillRect(25, 900, 5, 5);
+                gameBaseDrawer.fillRect(570, 50, 5, 5);
+                gameBaseDrawer.fillRect(570, 900, 5, 5);
+
+                // Piirretään laukauksia.    
+                gameBaseDrawer.setFill(Color.BLACK);
+                for (int x = 0; x < shotsToDraw.length; x++) {
+                    for (int y = 0; y < shotsToDraw[0].length; y++) {
+                        if (!shotsToDraw[x][y].equals("")) {
+                            gameBaseDrawer.fillText(shotsToDraw[x][y], x, y);
+                        }
+                    }
+                }
+                this.previous = currentNanoTime;
+            }
+        }
+                .start();
+
+        return new Scene(gameLayout, 600, 1000);
     }
 
     // metodi, joka luo ikkunan vanhojen pelien listaukseen
@@ -115,21 +197,14 @@ public class UserInterface extends Application {
             listGamesPane.getChildren().addAll(noPreviousGamesLabel);
         }
 
-        //ArrayList<Label> gamesLabelList = new ArrayList<>();
-        //ArrayList<Label> opponentsLabelList = new ArrayList<>();
-        //ArrayList<Button> chartButtonList = new ArrayList<>();
         for (int i = 0; i < previousCharts.size(); i++) {
-            //gamesLabelList.add(new Label(previousCharts.get(i).getDate()));            
-            //opponentsLabelList.add(new Label(previousCharts.get(i).getOpponent()));
-            //chartButtonList.add(new Button("Show shotchart"));                        
-
             Label gameDate = new Label(previousCharts.get(i).getDate());
             Label gameOpponent = new Label(previousCharts.get(i).getOpponent());
             Button gameDetailsButton = new Button("Show shotchart");
 
             final int gameId = previousCharts.get(i).getId();
             gameDetailsButton.setOnAction(e -> {
-                showChosenGame(primaryStage, gameId);
+                primaryStage.setScene(showChosenGame(primaryStage, gameId));
             });
 
             HBox gameDetailsPane = new HBox(20);
@@ -181,7 +256,7 @@ public class UserInterface extends Application {
             } else {
                 shotChartApp.createNewGame(date, opponent);
                 dateInput.setText("");
-                opponentInput.setText("");                
+                opponentInput.setText("");
                 primaryStage.setScene(createNewGameScene(primaryStage));
             }
         });
@@ -384,11 +459,17 @@ public class UserInterface extends Application {
         shotTypeButtons.setPadding(new Insets(20));
         // Nappi pelin päättämiselle.
         Button finishGameButton = new Button("Finish game");
-        shotTypeButtons.getChildren().addAll(goal, block, miss, finishGameButton);
+        Button cancelButton = new Button("Cancel");
+        shotTypeButtons.getChildren().addAll(goal, block, miss, finishGameButton, cancelButton);
         gameLayout.setTop(shotTypeButtons);
 
         finishGameButton.setOnAction(e -> {
-            shotChartApp.saveGame();          
+            shotChartApp.saveGame();
+            primaryStage.setScene(menuScene);
+        });
+
+        cancelButton.setOnAction(e -> {
+            shotChartApp.deleteGame();
             primaryStage.setScene(menuScene);
         });
 

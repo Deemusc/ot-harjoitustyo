@@ -66,7 +66,7 @@ public class ShotChartApp {
 
     // Uuden pelin luominen.
     public boolean createNewGame(String date, String opponent) {
-        // luodaan uusi peli-olio, jolle annetaan date, vastustaja ja käyttäjä       
+        // luodaan uusi peli-olio, jolle annetaan päiväys, vastustaja ja käyttäjä       
         ShotChart sc = new ShotChart(date, opponent, loggedIn);
         try {
             shotChart = shotChartDao.create(sc);
@@ -76,8 +76,47 @@ public class ShotChartApp {
         return true;
     }
 
+    public String[][] getShots(int id) {
+        try {
+            this.shotChart = shotChartDao.getChart(id);
+        } catch (Exception e) {
+
+        }
+        String[][] shots = new String[600][950];
+        for (int x = 0; x < 600; x++) {
+            for (int y = 0; y < 950; y++) {
+                shots[x][y] = "";
+            }
+        }
+
+        ArrayList<Shot> shotsList = shotChart.getShots();
+        for (int i = 0; i < shotsList.size(); i++) {
+            shots[shotsList.get(i).getX()][shotsList.get(i).getY()] = shotsList.get(i).getType();
+        }
+        return shots;
+    }
+
     public void addShot(int x, int y, String type) {
         shotChart.addShot(x, y, type);
+    }
+
+    // haetaan ensin haluttu laukaisukartta id:n perusteella ja poistetaan sitten
+    public boolean deleteGameById(int id) {
+        try {
+            this.shotChart = shotChartDao.getChart(id);
+        } catch (Exception e) {
+            return false;
+        }
+        return deleteGame();
+    }
+
+    public boolean deleteGame() {
+        try {
+            shotChartDao.delete(this.shotChart);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
     public boolean saveGame() {
@@ -94,13 +133,11 @@ public class ShotChartApp {
         ArrayList<ShotChart> charts = new ArrayList<>();
         ArrayList<ShotChart> allCharts = shotChartDao.getAll();
 
-        //if (loggedIn != null) {
-            for (int i = 0; i < allCharts.size(); i++) {
-                if (allCharts.get(i).getUser().getUsername().equals(loggedIn.getUsername())) {
-                    charts.add(allCharts.get(i));
-                }
+        for (int i = 0; i < allCharts.size(); i++) {
+            if (allCharts.get(i).getUser().getUsername().equals(loggedIn.getUsername())) {
+                charts.add(allCharts.get(i));
             }
-        //}
+        }
 
         return charts;
     }
