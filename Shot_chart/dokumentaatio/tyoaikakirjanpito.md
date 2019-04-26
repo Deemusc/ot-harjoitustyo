@@ -37,6 +37,6 @@
 **Pe 26.4.**
  - 1 h / Testien kirjoittamista.
  - 2 h / Javadocien kirjoittamista.
- - 
+ - 3 h / Arkkitehtuurin ja käyttöohjeen kirjoittaminen. Repositorion siistimistä yms.
 
-**Yhteensä: 33 tuntia**
+**Yhteensä: 36 tuntia**
