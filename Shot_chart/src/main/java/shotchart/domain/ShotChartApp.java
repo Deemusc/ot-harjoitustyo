@@ -2,18 +2,12 @@ package shotchart.domain;
 
 // @deemus
 import java.util.ArrayList;
-import java.util.List;
-import javafx.animation.AnimationTimer;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import shotchart.dao.ShotChartDao;
 import shotchart.dao.UserDao;
 
-// Sovelluslogiikasta vastaava luokka.
+/**
+ * Tämä luokka vastaa sovelluksen toimintalogiikasta.
+ */
 public class ShotChartApp {
 
     private ShotChartDao shotChartDao;
@@ -26,8 +20,14 @@ public class ShotChartApp {
         this.userDao = userDao;
     }
 
-    // Sisäänkirjautuminen, palauttaa true, jos käyttäjä on olemassa ja salasana on oikein.
-    // Asettaa sisäänkirjautuneeksi käyttäjäksi ao. käyttäjän.
+    /**
+     * Sisäänkirjautumistoiminto. Asettaa sisäänkirjautuneeksi käyttäjäksi ko.
+     * käyttäjän.
+     *
+     * @param username - käyttäjätunnus
+     * @param password - salasana
+     * @return True, jos sisäänkirjautuminen onnistuu, muuten false.
+     */
     public boolean login(String username, String password) {
         User user = userDao.findByUsername(username);
         if (user == null) {
@@ -40,17 +40,32 @@ public class ShotChartApp {
         return true;
     }
 
-    // Palautetaan sisäänkirjautunut käyttäjä.
+    /**
+     * Metodi sisäänkirjautuneen käyttäjän kysymiseen.
+     *
+     * @return Käyttäjän (User), joka on kirjautuneena sisään. Voi olla myös
+     * null.
+     */
     public User getLoggedUser() {
         return loggedIn;
     }
 
-    // Kirjataan käyttäjä ulos, eli 'sisäänkirjautuneeksi käyttäjäksi asetetaan null'.
+    /**
+     * Uloskirjautuminen. Käytännössä sisäänkirjautuneeksi käyttäjäksi asetetaan
+     * null.
+     */
     public void logout() {
         loggedIn = null;
     }
 
-    // Uuden käyttäjän luominen. Jos käyttäjänimi on jo olemassa, palautetaan false.
+    /**
+     * Uuden käyttäjän luominen.
+     *
+     * @param username - käyttäjänimi
+     * @param password - salasana
+     * @return True, jos käyttäjän luonti onnistuu. False, jos käyttäjänimi on
+     * jo käytössä.
+     */
     public boolean createUser(String username, String password) {
         if (userDao.findByUsername(username) != null) {
             return false;
@@ -64,7 +79,13 @@ public class ShotChartApp {
         return true;
     }
 
-    // Uuden pelin luominen.
+    /**
+     * Uuden ottelun luominen.
+     *
+     * @param date - ottelun päivämäärä
+     * @param opponent - ottelun vastustajan nimi
+     * @return
+     */
     public boolean createNewGame(String date, String opponent) {
         // luodaan uusi peli-olio, jolle annetaan päiväys, vastustaja ja käyttäjä       
         ShotChart sc = new ShotChart(date, opponent, loggedIn);
@@ -76,6 +97,15 @@ public class ShotChartApp {
         return true;
     }
 
+    /**
+     * Tietyn ottelun laukausten asettaminen kentän 'koordinaatistoon'. Luodaan
+     * ensin tyhjä 'koordinaatisto', haetaan lista ottelun laukauksista ja
+     * merkitään ne taulukkoon.
+     *
+     * @param id - ottelun tunnus
+     * @return Kaksiuloitteisen taulukon, jossa tieto kunkin kohdan
+     * laukauksesta.
+     */
     public String[][] getShots(int id) {
         try {
             this.shotChart = shotChartDao.getChart(id);
@@ -96,16 +126,38 @@ public class ShotChartApp {
         return shots;
     }
 
+    /**
+     * Lisää laukauksen laukaisukartalle.
+     *
+     * @param x - laukauksen x-koordinaatti
+     * @param y - laukauksen y-koordinaatti
+     * @param type - laukauksen tyyppi, eli maali, blokki tai ohilaukaus
+     */
     public void addShot(int x, int y, String type) {
         shotChart.addShot(x, y, type);
     }
-    
+
+    /**
+     * Poistaa laukauksen laukaisukartalta.
+     *
+     * @param x - laukauksen x-koordinaatti
+     * @param y - laukauksen y-koordinaatti
+     * @see domain.ShotChart#deleteShot(int x, int y)
+     * @return Sen laukaus-olion, joka poistettiin.
+     */
     public Shot deleteShot(int x, int y) {
         return shotChart.deleteShot(x, y);
     }
-    
 
-    // haetaan ensin haluttu laukaisukartta id:n perusteella ja poistetaan sitten
+    /**
+     * Poistetaan tietty ottelu sen tunnuksen perusteella. Hyödynnetään metodia
+     * deleteGame()
+     *
+     * @param id - poistettavan ottelun tunnus
+     * @see domain.ShotChartApp#deleteGame()
+     * @return True, jos ottelu löytyy ja sen poistaminen onnistuu, muuten
+     * false.
+     */
     public boolean deleteGameById(int id) {
         try {
             this.shotChart = shotChartDao.getChart(id);
@@ -115,6 +167,12 @@ public class ShotChartApp {
         return deleteGame();
     }
 
+    /**
+     * Ottelun poistaminen.
+     *
+     * @see dao.ShotChartDao#delete
+     * @return True, jos ottelun poistaminen onnistui, muuten false.
+     */
     public boolean deleteGame() {
         try {
             shotChartDao.delete(this.shotChart);
@@ -124,6 +182,12 @@ public class ShotChartApp {
         return true;
     }
 
+    /**
+     * Ottelun tietojen tallentaminen
+     *
+     * @see dao.ShotChartDao#update
+     * @return True, jos ottelun tallentaminen onnistui, muuten false.
+     */
     public boolean saveGame() {
         try {
             shotChart = shotChartDao.update(this.shotChart);
@@ -133,7 +197,12 @@ public class ShotChartApp {
         return true;
     }
 
-    // metodi, joka palauttaa kaikki kirjautuneena olevan käyttäjän laukaisukartat
+    /**
+     * Hakee kaikki kirjautuneena olevan käyttäjän laukaisukartat.
+     *
+     * @see dao.ShotChartDao.getAll()
+     * @return Listan, jossa on kaikki kirjautuneen käyttäjän laukaisukartat.
+     */
     public ArrayList<ShotChart> getShotCharts() {
         ArrayList<ShotChart> charts = new ArrayList<>();
         ArrayList<ShotChart> allCharts = shotChartDao.getAll();
@@ -143,7 +212,6 @@ public class ShotChartApp {
                 charts.add(allCharts.get(i));
             }
         }
-
         return charts;
     }
 
