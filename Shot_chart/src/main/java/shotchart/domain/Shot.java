@@ -1,7 +1,8 @@
 package shotchart.domain;
 
-//@deemus
-// Yksittäistä laukausta kuvaava luokka
+/**
+ * Yksittäistä laukausta kuvaava luokka.
+ */
 public class Shot {
 
     private int x;
@@ -37,5 +38,4 @@ public class Shot {
     public void setType(String type) {
         this.type = type;
     }
-
 }

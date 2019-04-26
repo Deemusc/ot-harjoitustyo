@@ -1,7 +1,5 @@
 package shotchart.dao;
 
-// @deemus
-
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
@@ -9,11 +7,14 @@ import java.util.List;
 import java.util.Scanner;
 import shotchart.domain.User;
 
-
+/**
+ * Käyttäjän DAO.
+ */
 public class FileUserDao implements UserDao {
+
     private List<User> users;
-    private String file;    
-    
+    private String file;
+
     public FileUserDao(String file) throws Exception {
         users = new ArrayList<>();
         this.file = file;
@@ -37,7 +38,14 @@ public class FileUserDao implements UserDao {
             }
         }
     }
-    
+
+    /**
+     * Käyttäjän luominen ja tallentaminen tiedostoon.
+     *
+     * @param user tallennettava käyttäjä-olio.
+     * @return tallennettu käyttäjä
+     * @throws Exception
+     */
     @Override
     public User create(User user) throws Exception {
         users.add(user);
@@ -45,6 +53,12 @@ public class FileUserDao implements UserDao {
         return user;
     }
 
+    /**
+     * Käyttäjän hakeminen käyttäjänimen perusteella.
+     *
+     * @param username etsittävä käyttäjänimi
+     * @return Löydetty käyttäjä, jos käyttäjää ei löydy, null.
+     */
     @Override
     public User findByUsername(String username) {
         return users.stream()
@@ -54,6 +68,11 @@ public class FileUserDao implements UserDao {
                 .orElse(null);
     }
 
+    /**
+     * Kaikkien käyttäjien haku.
+     *
+     * @return Listan kaikista tiedostosta löytyneistä käyttäjistä.
+     */
     @Override
     public List<User> getAll() {
         return users;

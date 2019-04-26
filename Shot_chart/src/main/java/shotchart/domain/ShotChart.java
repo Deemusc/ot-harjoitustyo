@@ -2,10 +2,11 @@ package shotchart.domain;
 
 // @deemus
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
-// Yksittäistä laukaisukarttaa kuvaava luokka.
+/**
+ * Yksittäistä laukaisukarttaa kuvaava luokka.
+ */
 public class ShotChart {
 
     private int id;
@@ -31,6 +32,13 @@ public class ShotChart {
         this.shots = new ArrayList<>();
     }
 
+    /**
+     * Laukaisukartan laukaukset merkkijonomuotoon muuttava metodi.
+     * Merkkijonomuodossa ne voidaan tallentaa tiedostoon.
+     *
+     * @return Merkkijono, jossa laukaukset muodossa
+     * 'tyyppi';'x-koord.';'y-koord.'
+     */
     public String getShotsAsString() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < shots.size(); i++) {
@@ -39,10 +47,26 @@ public class ShotChart {
         return sb.toString();
     }
 
+    /**
+     * Laukauksen lisääminen laukaisukartalle.
+     *
+     * @param x laukauksen x-koordinaatti
+     * @param y laukauksen y-koordinaatti
+     * @param type laukauksen tyyppi (maali, blokki, ohilaukaus)
+     */
     public void addShot(int x, int y, String type) {
         this.shots.add(new Shot(x, y, type));
     }
 
+    /**
+     * Laukauksen poistaminen laukaisukartalta. Käytetään kumittaessa laukausta
+     * laukasten syöttöikkunassa. Metodi poistaa yhden laukauksen 10x10
+     * koordinaatin kokoiselta alueelta kumituksen hiirenklikkauksesta.
+     *
+     * @param x kumituksen hiirenklikkauksen x-koordinaatti
+     * @param y kumituksen hiirenklikkauksen y-koordinaatti
+     * @return Sen laukauksen, joka poistetaan laukaisukartalta.
+     */
     public Shot deleteShot(int x, int y) {
         Shot returnable = null;
         int index = -1;
@@ -98,6 +122,11 @@ public class ShotChart {
         this.user = user;
     }
 
+    /**
+     * Hajautusarvon luominen.
+     *
+     * @return Hajautusarvon laukaisukartta-oliolle.
+     */
     @Override
     public int hashCode() {
         int hash = 5;
@@ -108,6 +137,14 @@ public class ShotChart {
         return hash;
     }
 
+    /**
+     * Vertailumetodi, kertoo onko laukaisukartta sama kuin vertailtava
+     * laukaisukartta.
+     *
+     * @param obj Vertailtava laukaisukartta.
+     * @return False, jos vertailtava olio on null tai jos sen luokka, tunnus,
+     * päiväys tai vastustaja on eri kuin laukaisukartan. Muuten True.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -128,5 +165,4 @@ public class ShotChart {
         }
         return Objects.equals(this.opponent, other.opponent);
     }
-
 }

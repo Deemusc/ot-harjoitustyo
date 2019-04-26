@@ -129,9 +129,10 @@ public class ShotChartApp {
     /**
      * Lisää laukauksen laukaisukartalle.
      *
-     * @param x - laukauksen x-koordinaatti
-     * @param y - laukauksen y-koordinaatti
-     * @param type - laukauksen tyyppi, eli maali, blokki tai ohilaukaus
+     * @param x laukauksen x-koordinaatti
+     * @param y laukauksen y-koordinaatti
+     * @param type laukauksen tyyppi, eli maali, blokki tai ohilaukaus
+     * @see shotchart.domain.ShotChart#addShot(int, int, java.lang.String) 
      */
     public void addShot(int x, int y, String type) {
         shotChart.addShot(x, y, type);

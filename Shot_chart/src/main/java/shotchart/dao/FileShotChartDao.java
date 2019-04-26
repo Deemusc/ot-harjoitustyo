@@ -4,16 +4,17 @@ package shotchart.dao;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Scanner;
 import shotchart.domain.Shot;
 import shotchart.domain.ShotChart;
 import shotchart.domain.User;
 
+/**
+ * Laukaisukartan DAO.
+ */
 public class FileShotChartDao implements ShotChartDao {
 
-    public ArrayList<ShotChart> shotCharts;
+    private ArrayList<ShotChart> shotCharts;
     private String file;
 
     // Haetaan tiedostosta laukaisukarttojen tiedot ja luodaan niistä lista laukaisukartoista
@@ -36,7 +37,7 @@ public class FileShotChartDao implements ShotChartDao {
                 shotCharts.add(shotChart);
             }
         } catch (Exception e) {
-            FileWriter writer = new FileWriter(new File(file));            
+            FileWriter writer = new FileWriter(new File(file));
             writer.close();
         }
     }
@@ -54,6 +55,12 @@ public class FileShotChartDao implements ShotChartDao {
         return shotCharts.size() + 1;
     }
 
+    /**
+     * Laukaisukartan poistaminen tiedostosta.
+     *
+     * @param shotChart poistettava laukaisukartta
+     * @throws Exception
+     */
     @Override
     public void delete(ShotChart shotChart) throws Exception {
         int index = -1;
@@ -63,11 +70,18 @@ public class FileShotChartDao implements ShotChartDao {
             }
         }
         if (index != -1) {
-            shotCharts.remove(index);            
+            shotCharts.remove(index);
             save();
         }
     }
 
+    /**
+     * Laukaisukartan hakeminen tunnuksen perusteella.
+     *
+     * @param id haettavan laukaisukartan tunnus
+     * @return Laukaisukartta-olion, jos sellainen löytyy, jos ei, null.
+     * @throws Exception
+     */
     @Override
     public ShotChart getChart(int id) throws Exception {
         for (int i = 0; i < shotCharts.size(); i++) {
@@ -77,7 +91,14 @@ public class FileShotChartDao implements ShotChartDao {
         }
         return null;
     }
-    
+
+    /**
+     * Laukaisukarttaan tehtyjen muutosten tallentaminen tiedostoon.
+     *
+     * @param shotChart laukaisukartta, johon muutoksia on tehty
+     * @return Laukaisukartta, jonka muutokset on tallennettu.
+     * @throws Exception
+     */
     @Override
     public ShotChart update(ShotChart shotChart) throws Exception {
         int index = -1;
@@ -94,6 +115,13 @@ public class FileShotChartDao implements ShotChartDao {
         return shotChart;
     }
 
+    /**
+     * Uuden laukaisukartan tallentaminen tiedostoon.
+     *
+     * @param shotChart tallennettava laukaisukartta
+     * @return Tallennettu laukaisukartta.
+     * @throws Exception
+     */
     @Override
     public ShotChart create(ShotChart shotChart) throws Exception {
         shotChart.setId(generateId());
@@ -102,6 +130,11 @@ public class FileShotChartDao implements ShotChartDao {
         return shotChart;
     }
 
+    /**
+     * Kaikkien tiedoston laukaisukarttojen haku.
+     *
+     * @return Kaikki laukaisukartta-oliot listalla.
+     */
     @Override
     public ArrayList<ShotChart> getAll() {
         return shotCharts;

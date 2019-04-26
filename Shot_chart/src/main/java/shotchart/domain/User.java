@@ -1,7 +1,9 @@
 package shotchart.domain;
 
-// @deemus
-// Sovelluksen käyttäjää kuvaava luokka.
+/**
+ * Sovelluksen käyttäjää kuvaava luokka.
+ *
+ */
 public class User {
 
     private String username;
@@ -20,12 +22,17 @@ public class User {
         return username;
     }
 
+    /**
+     * Vertailumetodi, kertoo onko käyttäjä sama kuin vertailtava käyttäjä.
+     *
+     * @param obj Vertailtava käyttäjä-olio.
+     * @return True, jos käyttäjien käyttäjänimet ovat samat, muuten false.
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof User)) {
             return false;
         }
-
         User other = (User) obj;
         return username.equals(other.username);
     }

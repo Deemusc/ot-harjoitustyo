@@ -31,6 +31,9 @@ import shotchart.domain.Shot;
 import shotchart.domain.ShotChart;
 import shotchart.domain.ShotChartApp;
 
+/**
+ * Käyttöliittymää kuvaava luokka.
+ */
 public class UserInterface extends Application {
 
     // tarvittavia muuttujia
@@ -58,7 +61,12 @@ public class UserInterface extends Application {
         shotChartApp = new ShotChartApp(shotChartDao, userDao);
     }
 
-    // varsinainen graafisen UI:n käynnistys
+    /**
+     * Graafisen käyttöliittymän käynnistys.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -78,12 +86,18 @@ public class UserInterface extends Application {
         });
     }
 
-    // metodi, joka hakee käyttäjän laukaisukartat kutsuttaessa
+    /**
+     * Käyttäjän laukaisukarttojen haku niiden graafista esittämistä varten.
+     */
     public void listShotCharts() {
         previousCharts = shotChartApp.getShotCharts();
     }
 
-    // metodi, joka piirtä kentän ja sen laukaukset
+    /**
+     * Tyhjän kentän ja siihen asetettavien laukausten piirtäminen.
+     *
+     * @return 'Näkymän', scenen, jossa piirretty kenttä.
+     */
     public Canvas drawChart() {
         Canvas gameBase = new Canvas(600, 950);
         GraphicsContext gameBaseDrawer = gameBase.getGraphicsContext2D();
@@ -149,7 +163,13 @@ public class UserInterface extends Application {
         return gameBase;
     }
 
-    // metodi, joka piirtää tietyn pelin laukaukset kartalle
+    /**
+     * Jo tallennetun ottelun laukausten piirtäminen kentälle.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @param id Ottelun tunnus, jonka laukausukartta piirretään.
+     * @return 'Näkymä', scene, johon piirretty halutun ottelun laukaukset.
+     */
     public Scene showChosenGame(Stage primaryStage, int id) {
 
         // haetaan laukaisukartan laukaukset
@@ -180,7 +200,13 @@ public class UserInterface extends Application {
         return new Scene(gameLayout, 600, 1000);
     }
 
-    // metodi, joka luo ikkunan vanhojen pelien listaukseen
+    /**
+     * Ikkunan luominen vanhojen otteluiden listaamiseen.
+     *
+     * @param primaryStage ensisjainen 'tapahtumapaikka', stage
+     * @return 'Näkymä', scene, jossa esitetty graafisesti vanhojen otteluiden
+     * listaus.
+     */
     public Scene createGamesListScene(Stage primaryStage) {
         // ----- Luodaan vanhojen otteluiden listausikkuna -----
         VBox listGamesPane = new VBox(20);
@@ -225,7 +251,13 @@ public class UserInterface extends Application {
         return new Scene(listGamesPane, 600, 1000);
     }
 
-    // metodi, joka luo ikkunan uuden pelin tietojen syöttämistä varten
+    /**
+     * Ikkunan luominen uuden ottelun tietojen syöttämistä varten.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @return 'Näkymä', scene, jossa graafinen esitys uuden ottelun tietojen
+     * keräämiseen.
+     */
     public Scene createNewGameInfoScene(Stage primaryStage) {
         // ----- Luodaan ikkuna uuden pelin tietojen syöttämiselle -----
         VBox infoPane = new VBox(20);
@@ -272,7 +304,12 @@ public class UserInterface extends Application {
         return new Scene(infoPane, 600, 1000);
     }
 
-    // metodi, joka luo päävalikon ikkunan
+    /**
+     * Päävalikon ikkunan luominen.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @return 'Näkymä', scene, jossa päävalikon ikkuna.
+     */
     public Scene createMainmenuScene(Stage primaryStage) {
         // ----- Luodaan ikkuna päävalikolle -----
         VBox menuLayoutPane = new VBox(20);
@@ -306,7 +343,13 @@ public class UserInterface extends Application {
         return new Scene(menuLayoutPane, 600, 1000);
     }
 
-    // metodi, joka luo ikkunan uuden käyttäjän luontia varten
+    /**
+     * Uuden käyttäjän luomiseen tarvittavan ikkunan luonti.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @return 'Näkymä', scene, jossa graafinen esitys uuden käyttäjän tietojen
+     * keräämiseen.
+     */
     public Scene createNewUserScene(Stage primaryStage) {
         // ----- Uuden käyttäjän luomisikkuna -----
         VBox newUserPane = new VBox(20);
@@ -362,7 +405,12 @@ public class UserInterface extends Application {
         return new Scene(newUserPane, 600, 1000);
     }
 
-    // metodi, joka luo sisäänkirjautumisikkunan
+    /**
+     * Sisäänkirjautumisikkunan luonti.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @return 'Näkymä', scene, jossa graafinen esitys sisäänkirjautumiseen.
+     */
     public Scene createLoginScene(Stage primaryStage) {
         // ----- Luodaan sisäänkirjautumisikkuna -----
         VBox loginPane = new VBox(20);
@@ -421,12 +469,20 @@ public class UserInterface extends Application {
         return new Scene(loginPane, 600, 1000);
     }
 
-    // metodi, joka tyhjentää kartan laukauksista
+    /**
+     * Kartan tyhjentäminen laukauksista muun ottelun piirtämistä varten.
+     */
     public void clearChart() {
         shotsToDraw = new String[600][950];
     }
 
-    // metodi, joka luo uudelle pelille kentän ja huolehtii laukausten piirtämisestä
+    /**
+     * Uuden ottelun kentän luominen ja laukausten piirtäminen siihen.
+     *
+     * @param primaryStage ensisijainen 'tapahtumapaikka', stage
+     * @return 'Näkymä', scene, johon piirretty tyhjä kenttä ja johon voi
+     * piirtää uusia laukauksia.
+     */
     public Scene createNewGameScene(Stage primaryStage) {
         // ----- Luodaan uuden pelin ikkuna -----
 
@@ -506,6 +562,9 @@ public class UserInterface extends Application {
         return new Scene(gameLayout, 600, 1000);
     }
 
+    /**
+     * Graafisen käyttöliittymän pysäyttäminen.
+     */
     @Override
     public void stop() {
         System.out.println("Laukaisukartat sulkeutuu");
