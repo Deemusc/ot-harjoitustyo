@@ -84,7 +84,7 @@ public class ShotChartApp {
      *
      * @param date - ottelun päivämäärä
      * @param opponent - ottelun vastustajan nimi
-     * @return
+     * @return True, jos uuden ottelun luonti onnistui, muuten false.
      */
     public boolean createNewGame(String date, String opponent) {
         // luodaan uusi peli-olio, jolle annetaan päiväys, vastustaja ja käyttäjä       
@@ -142,7 +142,7 @@ public class ShotChartApp {
      *
      * @param x - laukauksen x-koordinaatti
      * @param y - laukauksen y-koordinaatti
-     * @see domain.ShotChart#deleteShot(int x, int y)
+     * @see shotchart.domain.ShotChart#deleteShot(int, int)
      * @return Sen laukaus-olion, joka poistettiin.
      */
     public Shot deleteShot(int x, int y) {
@@ -154,7 +154,7 @@ public class ShotChartApp {
      * deleteGame()
      *
      * @param id - poistettavan ottelun tunnus
-     * @see domain.ShotChartApp#deleteGame()
+     * @see shotchart.domain.ShotChartApp#deleteGame()
      * @return True, jos ottelu löytyy ja sen poistaminen onnistuu, muuten
      * false.
      */
@@ -170,7 +170,7 @@ public class ShotChartApp {
     /**
      * Ottelun poistaminen.
      *
-     * @see dao.ShotChartDao#delete
+     * @see shotchart.dao.ShotChartDao#delete(shotchart.domain.ShotChart) 
      * @return True, jos ottelun poistaminen onnistui, muuten false.
      */
     public boolean deleteGame() {
@@ -185,7 +185,7 @@ public class ShotChartApp {
     /**
      * Ottelun tietojen tallentaminen
      *
-     * @see dao.ShotChartDao#update
+     * @see shotchart.dao.ShotChartDao#update(shotchart.domain.ShotChart)
      * @return True, jos ottelun tallentaminen onnistui, muuten false.
      */
     public boolean saveGame() {
@@ -200,7 +200,7 @@ public class ShotChartApp {
     /**
      * Hakee kaikki kirjautuneena olevan käyttäjän laukaisukartat.
      *
-     * @see dao.ShotChartDao.getAll()
+     * @see shotchart.dao.ShotChartDao#getAll() 
      * @return Listan, jossa on kaikki kirjautuneen käyttäjän laukaisukartat.
      */
     public ArrayList<ShotChart> getShotCharts() {
