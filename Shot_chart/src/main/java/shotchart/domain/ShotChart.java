@@ -47,7 +47,7 @@ public class ShotChart {
         Shot returnable = null;
         int index = -1;
         for (int i = 0; i < shots.size(); i++) {
-            if ((shots.get(i).getX() > x-10 && shots.get(i).getX() < x+10) && (shots.get(i).getY() > y-10 && shots.get(i).getY() < y+10)) {
+            if ((shots.get(i).getX() > x - 10 && shots.get(i).getX() < x + 10) && (shots.get(i).getY() > y - 10 && shots.get(i).getY() < y + 10)) {
                 index = i;
             }
         }
