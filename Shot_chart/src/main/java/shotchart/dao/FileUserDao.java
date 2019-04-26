@@ -44,7 +44,7 @@ public class FileUserDao implements UserDao {
      *
      * @param user tallennettava käyttäjä-olio.
      * @return tallennettu käyttäjä
-     * @throws Exception
+     * @throws Exception Virheen käsittely.
      */
     @Override
     public User create(User user) throws Exception {

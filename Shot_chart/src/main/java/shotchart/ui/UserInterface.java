@@ -65,7 +65,7 @@ public class UserInterface extends Application {
      * Graafisen käyttöliittymän käynnistys.
      *
      * @param primaryStage ensisijainen 'tapahtumapaikka', stage
-     * @throws Exception
+     * @throws Exception Virheen käsittely.
      */
     @Override
     public void start(Stage primaryStage) throws Exception {

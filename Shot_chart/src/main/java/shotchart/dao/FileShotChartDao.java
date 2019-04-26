@@ -59,7 +59,7 @@ public class FileShotChartDao implements ShotChartDao {
      * Laukaisukartan poistaminen tiedostosta.
      *
      * @param shotChart poistettava laukaisukartta
-     * @throws Exception
+     * @throws Exception Virheen käsittely.
      */
     @Override
     public void delete(ShotChart shotChart) throws Exception {
@@ -80,7 +80,7 @@ public class FileShotChartDao implements ShotChartDao {
      *
      * @param id haettavan laukaisukartan tunnus
      * @return Laukaisukartta-olion, jos sellainen löytyy, jos ei, null.
-     * @throws Exception
+     * @throws Exception Virheen käsittely.
      */
     @Override
     public ShotChart getChart(int id) throws Exception {
@@ -97,7 +97,7 @@ public class FileShotChartDao implements ShotChartDao {
      *
      * @param shotChart laukaisukartta, johon muutoksia on tehty
      * @return Laukaisukartta, jonka muutokset on tallennettu.
-     * @throws Exception
+     * @throws Exception Virheen käsittely.
      */
     @Override
     public ShotChart update(ShotChart shotChart) throws Exception {
@@ -120,7 +120,7 @@ public class FileShotChartDao implements ShotChartDao {
      *
      * @param shotChart tallennettava laukaisukartta
      * @return Tallennettu laukaisukartta.
-     * @throws Exception
+     * @throws Exception Virheen käsittely.
      */
     @Override
     public ShotChart create(ShotChart shotChart) throws Exception {
