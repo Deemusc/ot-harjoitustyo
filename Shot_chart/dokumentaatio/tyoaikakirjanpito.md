@@ -28,4 +28,15 @@
  - 1 h / Sovelluslogiikan kehittämistä, laukausten tallentaminen.
  - 2 h / Testien kirjoittamista, release, repoa siistiksi yms.
 
-**Yhteensä: 24 tuntia**
+#### Viikko 6
+
+**Ke 24.4.**
+ - 3 h / Uusien ominaisuuksien luominen ohjelmaan, tarvittavia ominaisuuksia käyttöliittymään ja sovelluslogiikkaan.
+ - 3 h / Käyttöliittymän parantelua ja siistimistä. Sovelluslogiikan korjailua.
+
+**Pe 26.4.**
+ - 1 h / Testien kirjoittamista.
+ - 2 h / Javadocien kirjoittamista.
+ - 
+
+**Yhteensä: 33 tuntia**
