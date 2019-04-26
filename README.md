@@ -8,6 +8,8 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 [Vaatimusmäärittely](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/vaatimusmaarittely.md)
 
+[Käyttöohje](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/kayttoohje.md)
+
 [Arkkitehtuurikuvaus](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/arkkitehtuuri.md)
 
 [Työaikakirjanpito](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/tyoaikakirjanpito.md)
@@ -15,6 +17,8 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 ## Julkaisut
 
 [Viikko 5](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko5)
+
+[Viikko 6](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko6)
 
 ## Komentorivitoiminnot
 
@@ -39,6 +43,14 @@ Komento
 generoi hakemistoon target suoritettavan jar-tiedoston *ShotChart-1.0-SNAPSHOT.jar.*
 
 **Huom. sovellus vaatii toimiakseen config.properties-tiedoston samaan kansioon, missä sovellus sijaitsee.**
+
+### JavaDoc
+
+Komento
+
+```mvn javadoc:javadoc```
+
+generoi sovelluksen JavaDocin. JavaDocia voi tarkastella selaimessa avaamalla tiedoston *target/site/apidocs/index.html*.
 
 ### Checkstyle
 
