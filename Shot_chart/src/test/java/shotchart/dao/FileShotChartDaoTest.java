@@ -32,12 +32,6 @@ public class FileShotChartDaoTest {
         userDao.create(new User("botnia", "antti123"));
         scDao = new FakeShotChartDao();
         scDao.create(new ShotChart("2019-02-01", "tps", new User("botnia", "antti123")));
-        
-        //try (FileWriter file = new FileWriter(userFile.getAbsolutePath())) {
-        //    file.write("1;2019-02-01;tps;botnia\n");
-        //}
-
-        //dao = new FileShotChartDao(userFile.getAbsolutePath(), userDao);
     }
 
     @Test
@@ -66,7 +60,7 @@ public class FileShotChartDaoTest {
 
     @Test
     public void getChartReturnsCorrectChart() throws Exception {
-        ShotChart lukko = scDao.create(new ShotChart("2019-04-04", "KyrPa", new User("botnia", "antti123")));      
+        ShotChart lukko = scDao.create(new ShotChart("2019-04-04", "KyrPa", new User("botnia", "antti123")));
         assertEquals(lukko, scDao.getChart(2));
     }
 
@@ -77,7 +71,6 @@ public class FileShotChartDaoTest {
         scDao.delete(scs.get(0));
         assertEquals(1, scs.size());
         assertEquals(hpk, scs.get(0));
-        //assertEquals(new ShotChart("2019-01-03", "HPK", new User("pori", "pata")), scs.get(0));
     }
 
     @After

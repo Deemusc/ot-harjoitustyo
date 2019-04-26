@@ -1,20 +1,27 @@
 package shotchart.domain;
 
-import org.junit.After;
-import org.junit.AfterClass;
+import java.io.File;
+import java.io.IOException;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Rule;
+import org.junit.rules.TemporaryFolder;
 
 public class ShotChartAppTest {
+
+    @Rule
+    public TemporaryFolder testFolder = new TemporaryFolder();
 
     FakeShotChartDao shotChartDao;
     FakeUserDao userDao;
     ShotChartApp app;
+    File shotChartFile;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        shotChartFile = testFolder.newFile("testfile_shotcharts.txt");
+        
         shotChartDao = new FakeShotChartDao();
         userDao = new FakeUserDao();
         User u1 = new User("botnia", "antti123");
@@ -23,14 +30,12 @@ public class ShotChartAppTest {
         userDao.create(u2);
         shotChartDao.create(new ShotChart("2019-02-02", "Veteli", new User("botnia", "antti123")));
         app = new ShotChartApp(shotChartDao, userDao);
-        //app.login("botnia", "antti123");
     }
 
     @Test
     public void nonExistingUserCantLogIn() {
         boolean result = app.login("tappara", "ojanen");
         assertFalse(result);
-
         assertEquals(null, app.getLoggedUser());
     }
 
@@ -38,7 +43,6 @@ public class ShotChartAppTest {
     public void existingUserCanLogIn() {
         boolean result = app.login("botnia", "antti123");
         assertTrue(result);
-
         User loggedIn = app.getLoggedUser();
         assertEquals("botnia", loggedIn.getUsername());
     }
@@ -47,7 +51,6 @@ public class ShotChartAppTest {
     public void loggedInUserCanLogout() {
         app.login("botnia", "antti123");
         app.logout();
-
         assertEquals(null, app.getLoggedUser());
     }
 
@@ -68,4 +71,37 @@ public class ShotChartAppTest {
         User loggedIn = app.getLoggedUser();
         assertEquals("huuhkajat", loggedIn.getUsername());
     }
+
+    @Test
+    public void createNewGameWorks() {
+        app.login("botnia", "antti123");
+        boolean createOk = app.createNewGame("2018-05-05", "hpk");
+        assertTrue(createOk);
+    }
+    
+    @Test
+    public void savingGameWorks() {
+        app.login("botnia", "antti123");
+        app.createNewGame("2019-10-11", "MSS");
+        app.addShot(100, 150, "G");
+        app.addShot(400, 400, "B");
+        boolean saveOk = app.saveGame();
+        assertTrue(saveOk);
+        
+    }
+    
+//    @Test
+//    public void getShotsReturnsCorrectShots() throws Exception {
+//        ShotChart testChart = shotChartDao.getAll().get(0);
+//        app.addShot(100, 100, "G");
+//        app.addShot(150, 100, "B");
+//        app.addShot(200, 500, "M");
+//        
+//        String[][] testShots = app.getShots(testChart.getId());
+//
+//        assertEquals("G", testShots[100][100]);
+//        assertEquals("B", testShots[150][100]);
+//        assertEquals("M", testShots[200][500]);
+//    }
+
 }

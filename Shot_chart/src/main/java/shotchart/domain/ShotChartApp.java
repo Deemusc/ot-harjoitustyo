@@ -80,7 +80,7 @@ public class ShotChartApp {
         try {
             this.shotChart = shotChartDao.getChart(id);
         } catch (Exception e) {
-
+            return new String[600][950];
         }
         String[][] shots = new String[600][950];
         for (int x = 0; x < 600; x++) {
