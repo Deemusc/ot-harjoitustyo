@@ -61,8 +61,8 @@ Sovelluksen osien suhteet on kuvattu pakkauskaaviossa:
 
 ## Tietojen pysyväistallennus
 
-Tietojen tallennuksesta tiedostoihin vastaavat siis luokat *FileShotChartDao* ja *FileUserDao*, jotka sijaitsevat pakkauksessa *shotchart.dao*. Luokat noudattavat **DAO**-
-mallia (Data Access Object) ja ovat ns. eristetty rajapintojen *ShotChartDao* ja *UserDao* taakse.
+Tietojen tallennuksesta tiedostoihin vastaavat siis luokat *FileShotChartDao* ja *FileUserDao*, jotka sijaitsevat pakkauksessa *shotchart.dao*. Luokat noudattavat
+**DAO**-mallia (Data Access Object) ja ovat ns. eristetty rajapintojen *ShotChartDao* ja *UserDao* taakse.
 
 ### Tallennustiedostot
 
