@@ -40,12 +40,25 @@ public class FakeShotChartDao implements ShotChartDao {
     }
 
     @Override
-    public void delete(ShotChart shotChart) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public ShotChart getChart(int id) throws Exception {
+        for (int i = 0; i < shotcharts.size(); i++) {
+            if (shotcharts.get(i).getId() == id) {
+                return shotcharts.get(i);
+            }
+        }
+        return null;
     }
 
     @Override
-    public ShotChart getChart(int id) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(ShotChart shotChart) throws Exception {
+        int index = -1;
+        for (int i = 0; i < shotcharts.size(); i++) {
+            if (shotcharts.get(i).getId() == shotChart.getId()) {
+                index = i;
+            }
+        }
+        if (index != -1) {
+            shotcharts.remove(index);
+        }
     }
 }
