@@ -1,7 +1,6 @@
 package shotchart.domain;
 
 import java.io.File;
-import java.io.IOException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -21,14 +20,14 @@ public class ShotChartAppTest {
     @Before
     public void setUp() throws Exception {
         shotChartFile = testFolder.newFile("testfile_shotcharts.txt");
-        
+
         shotChartDao = new FakeShotChartDao();
         userDao = new FakeUserDao();
         User u1 = new User("botnia", "antti123");
         User u2 = new User("klubi", "nakkimuki");
         userDao.create(u1);
         userDao.create(u2);
-        shotChartDao.create(new ShotChart("2019-02-02", "Veteli", new User("botnia", "antti123")));
+        shotChartDao.create(new ShotChart("2019-02-02", "Veteli", u1));
         app = new ShotChartApp(shotChartDao, userDao);
     }
 
@@ -78,7 +77,7 @@ public class ShotChartAppTest {
         boolean createOk = app.createNewGame("2018-05-05", "hpk");
         assertTrue(createOk);
     }
-    
+
     @Test
     public void savingGameWorks() {
         app.login("botnia", "antti123");
@@ -87,21 +86,7 @@ public class ShotChartAppTest {
         app.addShot(400, 400, "B");
         boolean saveOk = app.saveGame();
         assertTrue(saveOk);
-        
+
     }
-    
-//    @Test
-//    public void getShotsReturnsCorrectShots() throws Exception {
-//        ShotChart testChart = shotChartDao.getAll().get(0);
-//        app.addShot(100, 100, "G");
-//        app.addShot(150, 100, "B");
-//        app.addShot(200, 500, "M");
-//        
-//        String[][] testShots = app.getShots(testChart.getId());
-//
-//        assertEquals("G", testShots[100][100]);
-//        assertEquals("B", testShots[150][100]);
-//        assertEquals("M", testShots[200][500]);
-//    }
 
 }

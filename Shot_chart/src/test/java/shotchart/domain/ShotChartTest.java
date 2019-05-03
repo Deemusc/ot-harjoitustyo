@@ -1,10 +1,7 @@
 package shotchart.domain;
 
 import java.util.ArrayList;
-import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -44,6 +41,17 @@ public class ShotChartTest {
         shots.add(shot2);
         sc.setShots(shots);
         assertEquals(sc.getShotsAsString(), ";G;99;50;M;299;554");
+    }
+
+    @Test
+    public void deletingShotRemovesShot() {
+        ArrayList<Shot> shots = new ArrayList<>();
+        shots.add(shot);
+        shots.add(shot2);
+        sc.setShots(shots);
+        sc.deleteShot(97, 49);
+        assertEquals(sc.getShots().size(), 1);
+        assertEquals(null, sc.deleteShot(240, 500));
     }
 
 }

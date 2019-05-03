@@ -5,3 +5,5 @@ botnia;antti
 ifk;ifk
 kärpät;pallo
 tappara;ojanen
+hjk;hjk
+tps;tps

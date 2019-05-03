@@ -1,4 +1,3 @@
-// author: @deemus
 // pakkaus
 package shotchart.ui;
 
