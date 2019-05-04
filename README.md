@@ -12,6 +12,8 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 [Arkkitehtuurikuvaus](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/testaus.md)
+
 [Työaikakirjanpito](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/tyoaikakirjanpito.md)
 
 ## Julkaisut
