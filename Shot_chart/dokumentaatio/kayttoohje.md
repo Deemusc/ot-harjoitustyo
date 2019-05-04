@@ -1,10 +1,10 @@
 # Käyttöohje
 
-Lataa ohjelma [ShotChart](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko6). Lataa myös konfiguraatiotiedosto *config.properties*.
+Lataa ohjelma [ShotChart](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/Loppupalautus). Lataa myös konfiguraatiotiedosto *config.properties*.
 
 ### Konfigurointi
 
-Ohjelma vaatii toimiakseen konfiguraatiotiedoston *config.properties*, joka määrittelee käyttäjien ja laukaisukarttojen tallentamiseen käytettävät tiedostot.
+Ohjelma vaatii toimiakseen konfiguraatiotiedoston *config.properties*, jossa määritellään käyttäjien ja laukaisukarttojen tallentamiseen käytettävät tiedostot.
 
 ### Ohjelman käynnistäminen
 
