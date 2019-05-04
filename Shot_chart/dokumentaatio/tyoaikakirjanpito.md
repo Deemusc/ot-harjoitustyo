@@ -39,4 +39,14 @@
  - 2 h / Javadocien kirjoittamista.
  - 3 h / Arkkitehtuurin ja käyttöohjeen kirjoittaminen. Repositorion siistimistä yms.
 
-**Yhteensä: 36 tuntia**
+#### Viikko 7
+
+**Pe 3.5.**
+ - 2 h / Jacoco-ongelman selvittelyä.
+ - 2 h / Testien kirjoittamista.
+
+**La 4.5.**
+ - 1 h / Testien viimeistelyä.
+ - 2 h / Dokumentaation hiomista.
+
+**Yhteensä: 43 tuntia**
