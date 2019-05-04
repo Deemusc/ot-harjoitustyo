@@ -3,7 +3,6 @@ package shotchart.dao;
 // @deemus
 
 import java.util.ArrayList;
-import java.util.List;
 import shotchart.domain.ShotChart;
 
 

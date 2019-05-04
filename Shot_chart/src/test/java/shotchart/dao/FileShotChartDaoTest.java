@@ -10,7 +10,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.Rule;
 import org.junit.rules.TemporaryFolder;
-import shotchart.domain.FakeShotChartDao;
 import shotchart.domain.FakeUserDao;
 import shotchart.domain.ShotChart;
 import shotchart.domain.User;
@@ -21,32 +20,20 @@ public class FileShotChartDaoTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     File scFile;
-    //File shotChartFile;
     ShotChartDao scDao;
-    //UserDao userDao;
 
     @Before
     public void setUp() throws Exception {
         scFile = testFolder.newFile("testfile_scs.txt");
-//        shotChartFile = testFolder.newFile("testfile_shotcharts.txt");
-//
-//        try (FileWriter file = new FileWriter(userFile.getAbsolutePath())) {
-//            file.write("botnia;antti123\n");
-//        }
 
         UserDao userDao = new FakeUserDao();
         userDao.create(new User("hoocee", "hc12"));
-         
+
         try (FileWriter file = new FileWriter(scFile.getAbsolutePath())) {
             file.write("1;2019-01-01;IFK;hoocee;G;100;99\n");
         }
-        
-        scDao = new FileShotChartDao(scFile.getAbsolutePath(), userDao);
-        
-        //userDao = new FileUserDao(userFile.getAbsolutePath());
-        //scDao = new FileShotChartDao(shotChartFile.getAbsolutePath(), userDao);
-        //scDao.create(new ShotChart("2019-02-01", "tps", userDao.findByUsername("botnia")));
 
+        scDao = new FileShotChartDao(scFile.getAbsolutePath(), userDao);
     }
 
     @Test
@@ -60,7 +47,6 @@ public class FileShotChartDaoTest {
         assertEquals("hoocee", shotchart.getUser().getUsername());
     }
 
-    
     @Test
     public void createdShotChartsAreListed() throws Exception {
         scDao.create(new ShotChart("2019-04-04", "KyrPa", new User("pallokerho", "passu")));
@@ -73,15 +59,14 @@ public class FileShotChartDaoTest {
         assertNotEquals(1, shotchart.getId());
         assertEquals("pallokerho", shotchart.getUser().getUsername());
     }
-    
- 
+
     @Test
     public void getChartReturnsCorrectChart() throws Exception {
         ShotChart lukko = scDao.create(new ShotChart("2019-05-05", "Lukko", new User("hpk", "ritari")));
         assertEquals(lukko, scDao.getChart(2));
         assertEquals(null, scDao.getChart(10));
     }
-    
+
     @Test
     public void updatingChartUpdatesCorrectly() throws Exception {
         ShotChart sc = scDao.getChart(1);
@@ -92,7 +77,7 @@ public class FileShotChartDaoTest {
         scDao.update(fakeSc);
         assertEquals(1, scDao.getAll().size());
     }
- 
+
     @Test
     public void deletingChartRemovesChart() throws Exception {
         ShotChart tps = scDao.create(new ShotChart("2018-10-04", "TPS", new User("pori", "pata")));
@@ -102,8 +87,6 @@ public class FileShotChartDaoTest {
         assertEquals(tps, scs.get(0));
     }
 
-    
-    
     @After
     public void tearDown() {
         scFile.delete();
