@@ -18,9 +18,11 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 ## Julkaisut
 
-[Viikko 5](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko5)
+[Loppupalautus](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/Loppupalautus)
 
 [Viikko 6](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko6)
+
+[Viikko 5](https://github.com/Deemusc/ot-harjoitustyo/releases/tag/viikko5)
 
 ## Komentorivitoiminnot
 
