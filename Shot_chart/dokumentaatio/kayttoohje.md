@@ -46,3 +46,7 @@ painamalla sen kohdalla *Show shotchart*. Tällöin ohjelma näyttää kyseisen 
 
 Yläpalkista pääsee takaisin listaukseen tai voi poistaa kyseisen ottelun napeista *Back to list* ja *Delete game*.
 
+### Sovelluksen sulkeminen
+
+Päävalikossa on nappi *Logout*, josta voi kirjautua ulos sovelluksesta. Sovelluksen käytön voi tämän jälkeen lopettaa napista *Close*. Sovelluksen voi sulkea myös raksista
+yläkulmasta, tällöin kesken olevaa ottelua ei tallenneta, mutta käyttäjä kirjataan ulos.
