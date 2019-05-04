@@ -26,7 +26,9 @@ ja [FileUserDaoTest](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot
 
 ### Testikattavuus
 
-Sovelluksen testauksessa saavutettiin rivikattavuus 94 % ja haarautumakattavuus 88 %. Käyttöliittymä ei ole mukana testikattavuudessa.
+Sovelluksen testauksessa saavutettiin rivikattavuus 94 % ja haarautumakattavuus 88 %. Käyttöliittymä ei ole mukana testikattavuudessa. Kehitysvaiheessa havaittiin ongelma
+testikattavuudesta raportoivan *Jacocon* kanssa, ilmeisesti liittyen luokkien id:hin. Ongelmasta aiheutui osan testiluokista jääminen tarkoituksetta testikattavuuden ulkopuolelle.
+Loppupalautusvaiheessa ongelmaa ei havaittu.
 
 ![](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/kuvat/testikattavuus.png)
 
