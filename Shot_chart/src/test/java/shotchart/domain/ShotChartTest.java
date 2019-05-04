@@ -27,6 +27,7 @@ public class ShotChartTest {
     public void equalsWhenSameShotChart() {
         sc3 = new ShotChart("2019-04-04", "Jokerit", user);
         assertTrue(sc.equals(sc3));
+        assertTrue(sc.hashCode() == sc3.hashCode());
     }
 
     @Test

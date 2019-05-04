@@ -1,7 +1,6 @@
 package shotchart.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 import shotchart.dao.ShotChartDao;
 
 public class FakeShotChartDao implements ShotChartDao {

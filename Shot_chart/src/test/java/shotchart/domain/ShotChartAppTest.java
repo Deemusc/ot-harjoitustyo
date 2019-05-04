@@ -15,20 +15,14 @@ public class ShotChartAppTest {
     FakeShotChartDao shotChartDao;
     FakeUserDao userDao;
     ShotChartApp app;
-    File shotChartFile;
 
     @Before
     public void setUp() throws Exception {
-        shotChartFile = testFolder.newFile("testfile_shotcharts.txt");
 
         shotChartDao = new FakeShotChartDao();
         userDao = new FakeUserDao();
-        User u1 = new User("botnia", "antti123");
-        User u2 = new User("klubi", "nakkimuki");
-        userDao.create(u1);
-        userDao.create(u2);
-        shotChartDao.create(new ShotChart("2019-02-02", "Veteli", u1));
         app = new ShotChartApp(shotChartDao, userDao);
+
     }
 
     @Test
@@ -86,7 +80,40 @@ public class ShotChartAppTest {
         app.addShot(400, 400, "B");
         boolean saveOk = app.saveGame();
         assertTrue(saveOk);
-
     }
 
+    @Test
+    public void getShotsReturnsCorrectShots() {
+        app.login("botnia", "antti123");
+        app.createNewGame("2020-10-11", "Kisa");
+        app.addShot(99, 200, "B");
+        app.addShot(400, 250, "G");
+        app.addShot(55, 55, "M");
+        app.deleteShot(95, 203);
+        app.saveGame();
+
+        String[][] testShots = app.getShots(1);
+        assertEquals("", testShots[99][200]);
+        assertEquals("G", testShots[400][250]);
+        assertEquals("M", testShots[55][55]);
+        assertEquals("", testShots[10][10]);
+    }
+
+    @Test
+    public void getShotChartsReturnsCorrectList() {
+        app.login("botnia", "antti123");
+        app.createNewGame("2020-10-11", "Kisa");
+        app.createNewGame("2019-10-11", "MSS");
+        assertEquals(2, app.getShotCharts().size());
+    }
+
+    @Test
+    public void deleteGameByIdDeletesCorrectGame() {
+        app.login("botnia", "antti123");
+        app.createNewGame("2020-10-11", "Kisa");
+        app.createNewGame("2019-10-11", "MSS");
+        app.deleteGameById(1);
+        assertEquals("MSS", app.getShotCharts().get(0).getOpponent());
+    }
+    
 }
