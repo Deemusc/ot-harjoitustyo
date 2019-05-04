@@ -18,6 +18,10 @@ Kirjautumisvalikosta päästään luomaan uusi käyttäjä napilla *Create new u
 Mikäli käyttäjänimi on jo käytössä toisella käyttäjällä, ohjelma ilmoittaa tästä. Valitse tällöin toinen käyttäjänimi. Onnistuneesta käyttäjän luonnista ilmoitataan myös.
 Palaa kirjautumisvalikkoon napilla *Back to login screen*.
 
+![](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/kuvat/ohje_uusi_kayttaja.png)
+
+![](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/kuvat/ohje_kayttaja_luotu.png)
+
 ### Sisäänkirjautuminen
 
 Syötä käyttäjänimi sekä salasana ja paina *Login*-nappia. Jos käyttäjätunnus tai salasana on väärin, ohjelma ilmoittaa tästä.
@@ -29,10 +33,16 @@ laukauksen tyyppi yläpalkin *radiobutton*-valikosta. Laukaus voi mennä maaliin
 valittu, klikkaa kentällä kohtaa, josta laukaus lähti. Tällöin ohjelma merkkaa laukauksen kirjaimella siihen kohtaan. Laukauksen voi myös kumittaa valitsemalla *Erase* ja
 klikkaamalla piirrettyä laukausta.
 
+![](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/kuvat/ohje_laukausten_piirto.png)
+
 Kun ottelun kaikki laukaukset on merkitty, päätä peli napista *Finish game*. Jos haluat peruuttaa ottelun tallentamisen, valitse *Cancel*, jolloin sovellus palaa päävalikkoon.
 
 ### Vanhojen otteluiden selaaminen ja tarkastelu
 
 Napista *View previous games* päästään tarkastelemaan tallennettuja otteluita. Ottelut on listattu tallentamisjärjestyksessään. Yksittäistä ottelua päästään tarkastelemaan
-painamalla sen kohdalla *Show shotchart*. Tällöin ohjelma näyttää kyseisen ottelun laukaisukartan, eli otteluun merkatut laukaukset. Yläpalkista pääsee takaisin listaukseen tai
-voi poistaa kyseisen ottelun napeista *Back to list* ja *Delete game*.
+painamalla sen kohdalla *Show shotchart*. Tällöin ohjelma näyttää kyseisen ottelun laukaisukartan, eli otteluun merkatut laukaukset.
+
+![](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/dokumentaatio/kuvat/ohje_vanhojen_tarkastelu.png)
+
+Yläpalkista pääsee takaisin listaukseen tai voi poistaa kyseisen ottelun napeista *Back to list* ja *Delete game*.
+
