@@ -28,37 +28,37 @@ Sovellus on Helsingin yliopiston kurssin Ohjelmistotekniikka (kevät 2019) harjo
 
 ### Testaus
 
-Testit suoritetaan komennolla
+Testit suoritetaan komennolla:
 
 ```mvn test```
 
-Testikattavuusraportti testaamisen yhteydessä luodaan komennolla
+Testikattavuusraportti testaamisen yhteydessä luodaan komennolla:
 
 ```mvn test jacoco:report```
 
-Testikattavuusraporttia voi tarkastella avaamalla selaimella tiedosto */target/site/jacoco/index.html*
+Testikattavuusraporttia tarkastellaan selaimella avaamalla tiedosto */target/site/jacoco/index.html*.
 
 ### Suoritettavan jarin generointi
 
-Komento
+Suoritettava jar-tiedosto luodaan komennolla:
 
 ```mvn package```
 
-generoi hakemistoon target suoritettavan jar-tiedoston *ShotChart-1.0-SNAPSHOT.jar.*
+Kansioon target generoidaan tällöin suoritettava jar-tiedosto *ShotChart-1.0-SNAPSHOT.jar.*.
 
 **Huom. sovellus vaatii toimiakseen config.properties-tiedoston samaan kansioon, missä sovellus sijaitsee.**
 
 ### JavaDoc
 
-Komento
+Sovelluksen JavaDoc generoidaan komennolla:
 
 ```mvn javadoc:javadoc```
 
-generoi sovelluksen JavaDocin. JavaDocia voi tarkastella selaimessa avaamalla tiedoston *target/site/apidocs/index.html*.
+JavaDocia voi tarkastella selaimessa avaamalla tiedoston *target/site/apidocs/index.html*.
 
 ### Checkstyle
 
-Tiedostoon [checkstyle.xml](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla
+[Checkstyle-tiedostossa](https://github.com/Deemusc/ot-harjoitustyo/blob/master/Shot_chart/checkstyle.xml) määritellyt tarkistukset suoritetaan komennolla:
 
 ```mvn jxr:jxr checkstyle:checkstyle```
 
